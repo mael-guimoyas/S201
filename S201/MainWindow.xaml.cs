@@ -19,11 +19,17 @@ namespace S201
         public MainWindow()
         {
             InitializeComponent();
+            Conteneur.Content = new Accueuil();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Conteneur.Content = new CreerCommande();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Conteneur.Content = new Accueuil();
         }
     }
 }
