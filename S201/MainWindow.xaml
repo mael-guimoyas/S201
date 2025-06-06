@@ -1,0 +1,135 @@
+﻿<Window x:Class="S201.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:S201"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 1. Barre supérieure (Header) -->
+        <Border Grid.Row="0" Background="#2196F3" Padding="15">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="SIBILLA - TABLEAU DE BORD VENDEUR" 
+                           Foreground="White" FontWeight="Bold" FontSize="16" VerticalAlignment="Center"/>
+
+                <TextBlock Grid.Column="1" Text="Connecté en tant que: Jean Dupont (Vendeur)" 
+                           Foreground="White" VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+
+        <!-- 2. Barre de navigation (Tabs) -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Content="Accueil" Background="#1976D2" Foreground="White" 
+                    BorderThickness="0" FontSize="14" Padding="15 10"/>
+
+            <Button Grid.Column="1" Content="Commandes" Background="White" Foreground="Black" 
+                    BorderThickness="0" FontSize="14" Padding="15 10"/>
+
+            <Button Grid.Column="2" Content="Clients" Background="White" Foreground="Black" 
+                    BorderThickness="0" FontSize="14" Padding="15 10"/>
+        </Grid>
+
+        <!-- 3. Section principale (Tableau de bord) -->
+        <ScrollViewer Grid.Row="2" Padding="20">
+            <StackPanel>
+                <TextBlock Text="Tableau de bord vendeur" FontSize="18" FontWeight="Bold" Margin="0 0 0 20"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Tuile "Ajouter un plat" -->
+                    <Border Grid.Column="0" Background="White" BorderBrush="#E0E0E0" BorderThickness="1" 
+                            CornerRadius="4" Padding="15" Height="150">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.2"/>
+                        </Border.Effect>
+                        <Border BorderBrush="Red" BorderThickness="3 0 0 0">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                                    <TextBlock Text="+" FontSize="20" FontWeight="Bold" Margin="0 0 10 0"/>
+                                    <TextBlock Text="Ajouter un plat" FontWeight="Bold" FontSize="16"/>
+                                </StackPanel>
+                                <TextBlock Text="Ajouter un nouveau plat au catalogue des produits disponibles" 
+                                           TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+                    </Border>
+
+                    <!-- Tuile "Gérer les clients" -->
+                    <Border Grid.Column="2" Background="White" BorderBrush="#E0E0E0" BorderThickness="1" 
+                            CornerRadius="4" Padding="15" Height="150">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.2"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                                <TextBlock Text="👥" FontSize="20" Margin="0 0 10 0"/>
+                                <TextBlock Text="Gérer les clients" FontWeight="Bold" FontSize="16"/>
+                            </StackPanel>
+                            <TextBlock Text="Rechercher, modifier ou créer un nouveau client dans le système" 
+                                       TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Tuile "Commandes du jour" -->
+                    <Border Grid.Column="4" Background="White" BorderBrush="#E0E0E0" BorderThickness="1" 
+                            CornerRadius="4" Padding="15" Height="150">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.2"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                                <TextBlock Text="📋" FontSize="20" Margin="0 0 10 0"/>
+                                <TextBlock Text="Commandes du jour" FontWeight="Bold" FontSize="16"/>
+                            </StackPanel>
+                            <TextBlock Text="Visualiser et gérer les commandes prévues pour aujourd'hui" 
+                                       TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- 4. Pied de page -->
+        <Border Grid.Row="3" Background="#F5F5F5" Padding="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Sibilla - Privé" VerticalAlignment="Center"/>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock Text="Version 1.0.0" Margin="0 0 10 0" VerticalAlignment="Center"/>
+                    <TextBlock Text="© 2023 Sibilla" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
