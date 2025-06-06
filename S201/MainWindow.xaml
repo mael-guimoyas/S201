@@ -84,7 +84,6 @@
 
         <ContentControl x:Name="Conteneur" Grid.Row="2" />
 
-
         <Border
             Grid.Row="3"
             Padding="10"
