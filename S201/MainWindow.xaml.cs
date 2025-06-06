@@ -20,5 +20,10 @@ namespace S201
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Conteneur.Content = new CreerCommande();
+        }
     }
 }
