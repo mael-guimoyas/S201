@@ -4,7 +4,5 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:S201"
     StartupUri="MainWindow.xaml">
-    <Application.Resources>
-       
-    </Application.Resources>
+    <Application.Resources />
 </Application>

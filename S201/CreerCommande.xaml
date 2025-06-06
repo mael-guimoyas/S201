@@ -10,66 +10,116 @@
     mc:Ignorable="d">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="7*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="7*" />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
 
-        <!-- Colonne de gauche (70%) -->
+        <!--  Colonne de gauche (70%)  -->
         <StackPanel Grid.Column="0" Margin="0,0,20,0">
-            <!-- Bloc Sélection du client -->
-            <Border BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="4" Padding="10" Margin="0,0,0,20">
+            <!--  Bloc Sélection du client  -->
+            <Border
+                Margin="0,0,0,20"
+                Padding="10"
+                BorderBrush="#CCCCCC"
+                BorderThickness="1"
+                CornerRadius="4">
                 <StackPanel>
-                    <TextBlock Text="Sélection du client" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+                    <TextBlock
+                        Margin="0,0,0,10"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Text="Sélection du client" />
 
                     <Grid Margin="0,0,0,10">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="8*"/>
-                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="8*" />
+                            <ColumnDefinition Width="2*" />
                         </Grid.ColumnDefinitions>
 
-                        <TextBox Grid.Column="0" Margin="0,0,5,0" Padding="5" VerticalContentAlignment="Center"/>
-                        <Button Grid.Column="1" Content="Rechercher" Background="#0078D7" Foreground="White" Padding="5"/>
+                        <TextBox
+                            Grid.Column="0"
+                            Margin="0,0,5,0"
+                            Padding="5"
+                            VerticalContentAlignment="Center" />
+                        <Button
+                            Grid.Column="1"
+                            Padding="5"
+                            Background="#0078D7"
+                            Content="Rechercher"
+                            Foreground="White" />
                     </Grid>
 
-                    <!-- Cadre client sélectionné -->
-                    <Border BorderBrush="#CCCCCC" BorderThickness="1" Background="#F5F5F5" Padding="10">
+                    <!--  Cadre client sélectionné  -->
+                    <Border
+                        Padding="10"
+                        Background="#F5F5F5"
+                        BorderBrush="#CCCCCC"
+                        BorderThickness="1">
                         <StackPanel>
-                            <TextBlock Text="Nom: Jean Dupont" FontWeight="SemiBold"/>
-                            <TextBlock Text="Contact: 06 12 34 56 78" Margin="0,5,0,0"/>
-                            <TextBlock Text="Adresse: 12 Rue des Fleurs, 75000 Paris" Margin="0,5,0,0"/>
+                            <TextBlock FontWeight="SemiBold" Text="Nom: Jean Dupont" />
+                            <TextBlock Margin="0,5,0,0" Text="Contact: 06 12 34 56 78" />
+                            <TextBlock Margin="0,5,0,0" Text="Adresse: 12 Rue des Fleurs, 75000 Paris" />
                         </StackPanel>
                     </Border>
                 </StackPanel>
             </Border>
 
-            <!-- Bloc Sélection des plats -->
-            <Border BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="4" Padding="10">
+            <!--  Bloc Sélection des plats  -->
+            <Border
+                Padding="10"
+                BorderBrush="#CCCCCC"
+                BorderThickness="1"
+                CornerRadius="4">
                 <StackPanel>
                     <Grid Margin="0,0,0,10">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="Sélection des plats" FontWeight="Bold" FontSize="16"/>
-                        <Button Grid.Column="1" Content="+ Ajouter un plat" Background="#4FC3F7" Foreground="White" Padding="5,2"/>
+                        <TextBlock
+                            Grid.Column="0"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Text="Sélection des plats" />
+                        <Button
+                            Grid.Column="1"
+                            Padding="5,2"
+                            Background="#4FC3F7"
+                            Content="+ Ajouter un plat"
+                            Foreground="White" />
                     </Grid>
 
-                    <!-- Liste horizontale des plats -->
+                    <!--  Liste horizontale des plats  -->
                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-                        <ItemsControl ItemsSource="{Binding Dishes}">
+                        <ItemsControl ItemsSource="{Binding Plats}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0"/>
+                                    <StackPanel Margin="0,10,0,0" Orientation="Horizontal" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Width="220" Height="120" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="4" Margin="0,0,10,0" Background="White">
+                                    <Border
+                                        Width="220"
+                                        Height="120"
+                                        Margin="0,0,10,0"
+                                        Background="White"
+                                        BorderBrush="#CCCCCC"
+                                        BorderThickness="1"
+                                        CornerRadius="4">
                                         <StackPanel Margin="10">
-                                            <TextBlock Text="{Binding Title}" FontWeight="Bold"/>
-                                            <TextBlock Text="{Binding Subtitle}" Margin="0,5,0,0" FontSize="12" Foreground="#666666"/>
-                                            <TextBlock Text="{Binding Price}" Margin="0,20,0,0" Foreground="#4CAF50" HorizontalAlignment="Right"/>
+                                            <TextBlock FontWeight="Bold" Text="{Binding Title}" />
+                                            <TextBlock
+                                                Margin="0,5,0,0"
+                                                FontSize="12"
+                                                Foreground="#666666"
+                                                Text="{Binding Subtitle}" />
+                                            <TextBlock
+                                                Margin="0,20,0,0"
+                                                HorizontalAlignment="Right"
+                                                Foreground="#4CAF50"
+                                                Text="{Binding Price}" />
                                         </StackPanel>
                                     </Border>
                                 </DataTemplate>
@@ -80,32 +130,54 @@
             </Border>
         </StackPanel>
 
-        <!-- Colonne de droite (30%) - Récapitulatif -->
-        <Border Grid.Column="1" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="4" Background="#FAFAFA" Padding="15">
+        <!--  Colonne de droite (30%) - Récapitulatif  -->
+        <Border
+            Grid.Column="1"
+            Padding="15"
+            Background="#FAFAFA"
+            BorderBrush="#CCCCCC"
+            BorderThickness="1"
+            CornerRadius="4">
             <StackPanel>
-                <TextBlock Text="Récapitulatif de commande" FontWeight="Bold" FontSize="16" Margin="0,0,0,15"/>
+                <TextBlock
+                    Margin="0,0,0,15"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Text="Récapitulatif de commande" />
 
-                <!-- Liste des articles -->
+                <!--  Liste des articles  -->
                 <StackPanel Margin="0,0,0,15">
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                        <TextBlock Text="Salade César × 2" Width="120"/>
-                        <TextBlock Text="— 17,00 €" HorizontalAlignment="Right"/>
+                    <StackPanel Margin="0,0,0,5" Orientation="Horizontal">
+                        <TextBlock Width="120" Text="Salade César × 2" />
+                        <TextBlock HorizontalAlignment="Right" Text="— 17,00 €" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Poulet rôti × 3" Width="120"/>
-                        <TextBlock Text="— 38,70 €" HorizontalAlignment="Right"/>
+                        <TextBlock Width="120" Text="Poulet rôti × 3" />
+                        <TextBlock HorizontalAlignment="Right" Text="— 38,70 €" />
                     </StackPanel>
                 </StackPanel>
 
-                <Separator Margin="0,0,0,15"/>
+                <Separator Margin="0,0,0,15" />
 
-                <!-- Total -->
-                <TextBlock Text="Total : 55,70 €" FontWeight="Bold" Margin="0,0,0,20" HorizontalAlignment="Right"/>
+                <!--  Total  -->
+                <TextBlock
+                    Margin="0,0,0,20"
+                    HorizontalAlignment="Right"
+                    FontWeight="Bold"
+                    Text="Total : 55,70 €" />
 
-                <!-- Boutons -->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Content="Annuler" Background="#E0E0E0" Padding="15,5" Margin="0,0,10,0"/>
-                    <Button Content="Valider" Background="#4CAF50" Foreground="White" Padding="15,5"/>
+                <!--  Boutons  -->
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Button
+                        Margin="0,0,10,0"
+                        Padding="15,5"
+                        Background="#E0E0E0"
+                        Content="Annuler" />
+                    <Button
+                        Padding="15,5"
+                        Background="#4CAF50"
+                        Content="Valider"
+                        Foreground="White" />
                 </StackPanel>
             </StackPanel>
         </Border>
