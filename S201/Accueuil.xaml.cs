@@ -24,5 +24,10 @@ namespace S201
         {
             InitializeComponent();
         }
+
+        private void ButPlat_Click(object sender, RoutedEventArgs e)
+        {
+            Conteneur.Content = new RecherchePlats();
+        }
     }
 }

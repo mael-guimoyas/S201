@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace S201
 {
     /// <summary>
-    /// Logique d'interaction pour RecherchePlats.xaml
+    /// Logique d'interaction pour CreerPlat.xaml
     /// </summary>
-    public partial class RecherchePlats : UserControl
+    public partial class CreerPlat : UserControl
     {
-        public RecherchePlats()
+        public CreerPlat()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Conteneur.Content = new CreerPlat();
         }
     }
 }
