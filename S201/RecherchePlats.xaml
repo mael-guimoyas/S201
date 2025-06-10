@@ -109,7 +109,7 @@
                     </StackPanel>
                 </Border>
             </StackPanel>
-            <StackPanel Grid.Row="2" />
+            <DataGrid Grid.Row="2"></DataGrid>
         </Grid>
     </ScrollViewer>
 </UserControl>
