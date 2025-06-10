@@ -16,28 +16,25 @@ using System.Windows.Shapes;
 namespace S201
 {
     /// <summary>
-    /// Logique d'interaction pour GererClient.xaml
+    /// Logique d'interaction pour GererClients.xaml
     /// </summary>
-    public partial class GererClient : UserControl
+    public partial class GererClients : UserControl
     {
-        public GererClient()
+        public GererClients()
         {
-           /* InitializeComponent();*/
-            
+            InitializeComponent();
         }
-
         private void ChargerClients()
         {
             try
             {
                 Client client = new Client();
-                
+
             }
             catch (Exception ex)
             {
-                
+
             }
         }
     }
 }
-
