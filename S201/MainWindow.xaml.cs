@@ -34,7 +34,7 @@ namespace S201
 
         private void btn_clients_Click(object sender, RoutedEventArgs e)
         {
-            Conteneur.Content = new GererClient();
+            Conteneur.Content = new GererClients();
         }
     }
 }
