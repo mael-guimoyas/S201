@@ -31,5 +31,10 @@ namespace S201
         {
             Conteneur.Content = new Accueuil();
         }
+
+        private void btn_clients_Click(object sender, RoutedEventArgs e)
+        {
+            Conteneur.Content = new GererClient();
+        }
     }
 }
