@@ -5,4 +5,6 @@
     xmlns:local="clr-namespace:S201"
     StartupUri="MainWindow.xaml">
     <Application.Resources />
+    
+    
 </Application>

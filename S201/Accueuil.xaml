@@ -1,31 +1,39 @@
-﻿<UserControl x:Class="S201.Accueuil"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:S201"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <ScrollViewer x:Name="Conteneur" Grid.Row="2" Padding="20" >
-    <StackPanel>
-        <TextBlock
-            Margin="0,0,0,20"
-            FontSize="18"
-            FontWeight="Bold"
-            Padding="10"
-            Text="Tableau de bord vendeur" />
+﻿<UserControl
+    x:Class="S201.Accueuil"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:S201"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <ScrollViewer
+        x:Name="Conteneur"
+        Grid.Row="2"
+        Padding="20">
+        <StackPanel>
+            <TextBlock
+                Margin="0,0,0,20"
+                Padding="10"
+                FontSize="18"
+                FontWeight="Bold"
+                Text="Tableau de bord vendeur" />
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="10" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="10" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <!--  Tuile "Ajouter un plat"  -->
-                <Button x:Name="ButPlat" Click="ButPlat_Click">
+                <!--  Tuile "Ajouter un plat"  -->
+                <Button
+                    x:Name="ButPlat"
+                    BorderBrush="{x:Null}"
+                    Click="ButPlat_Click">
                     <Border
                         Grid.Column="0"
                         Height="150"
@@ -40,87 +48,93 @@
                                 Opacity="0.2"
                                 ShadowDepth="1" />
                         </Border.Effect>
-                        <Border BorderBrush="Red" BorderThickness="3,0,0,0" Margin="2,0,0,0">
+                        <Border
+                            Margin="2,0,0,0"
+                            BorderBrush="Red"
+                            BorderThickness="3,0,0,0">
                             <StackPanel>
                                 <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
                                     <TextBlock
                                         Margin="0,0,10,0"
+                                        Padding="5"
                                         FontSize="20"
                                         FontWeight="Bold"
-                                        Text="+"
-                                        Padding="5"/>
+                                        Text="+" />
                                     <TextBlock
+                                        VerticalAlignment="Center"
                                         FontSize="16"
                                         FontWeight="Bold"
-                                        Text="Ajouter un plat" VerticalAlignment="Center" 
-                                    />
+                                        Text="Ajouter un plat" />
                                 </StackPanel>
-                                <TextBlock Text="Ajouter un nouveau plat au catalogue des produits disponibles" TextWrapping="Wrap" Padding="5" />
+                                <TextBlock
+                                    Padding="5"
+                                    Text="Ajouter un nouveau plat au catalogue des produits disponibles"
+                                    TextWrapping="Wrap" />
                             </StackPanel>
                         </Border>
                     </Border>
                 </Button>
 
                 <!--  Tuile "Gérer les clients"  -->
-            <Border
-                Grid.Column="2"
-                Height="150"
-                Padding="15"
-                Background="White"
-                BorderBrush="#E0E0E0"
-                BorderThickness="1"
-                CornerRadius="4">
-                <Border.Effect>
-                    <DropShadowEffect
-                        BlurRadius="5"
-                        Opacity="0.2"
-                        ShadowDepth="1" />
-                </Border.Effect>
-                <StackPanel>
-                    <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
-                        <TextBlock
-                            Margin="0,0,10,0"
-                            FontSize="20"
-                            Text="👥" />
-                        <TextBlock
-                            FontSize="16"
-                            FontWeight="Bold"
-                            Text="Gérer les clients" />
+                <Border
+                    Grid.Column="2"
+                    Height="150"
+                    Padding="15"
+                    Background="White"
+                    BorderBrush="#E0E0E0"
+                    BorderThickness="1"
+                    CornerRadius="4">
+                    <Border.Effect>
+                        <DropShadowEffect
+                            BlurRadius="5"
+                            Opacity="0.2"
+                            ShadowDepth="1" />
+                    </Border.Effect>
+                    <StackPanel>
+                        <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
+                            <TextBlock
+                                Margin="0,0,10,0"
+                                FontSize="20"
+                                Text="👥" />
+                            <TextBlock
+                                FontSize="16"
+                                FontWeight="Bold"
+                                Text="Gérer les clients" />
+                        </StackPanel>
+                        <TextBlock Text="Rechercher, modifier ou créer un nouveau client dans le système" TextWrapping="Wrap" />
                     </StackPanel>
-                    <TextBlock Text="Rechercher, modifier ou créer un nouveau client dans le système" TextWrapping="Wrap" />
-                </StackPanel>
-            </Border>
+                </Border>
 
-            <!--  Tuile "Commandes du jour"  -->
-            <Border
-                Grid.Column="4"
-                Height="150"
-                Padding="15"
-                Background="White"
-                BorderBrush="#E0E0E0"
-                BorderThickness="1"
-                CornerRadius="4">
-                <Border.Effect>
-                    <DropShadowEffect
-                        BlurRadius="5"
-                        Opacity="0.2"
-                        ShadowDepth="1" />
-                </Border.Effect>
-                <StackPanel>
-                    <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
-                        <TextBlock
-                            Margin="0,0,10,0"
-                            FontSize="20"
-                            Text="📋" />
-                        <TextBlock
-                            FontSize="16"
-                            FontWeight="Bold"
-                            Text="Commandes du jour" />
+                <!--  Tuile "Commandes du jour"  -->
+                <Border
+                    Grid.Column="4"
+                    Height="150"
+                    Padding="15"
+                    Background="White"
+                    BorderBrush="#E0E0E0"
+                    BorderThickness="1"
+                    CornerRadius="4">
+                    <Border.Effect>
+                        <DropShadowEffect
+                            BlurRadius="5"
+                            Opacity="0.2"
+                            ShadowDepth="1" />
+                    </Border.Effect>
+                    <StackPanel>
+                        <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
+                            <TextBlock
+                                Margin="0,0,10,0"
+                                FontSize="20"
+                                Text="📋" />
+                            <TextBlock
+                                FontSize="16"
+                                FontWeight="Bold"
+                                Text="Commandes du jour" />
+                        </StackPanel>
+                        <TextBlock Text="Visualiser et gérer les commandes prévues pour aujourd'hui" TextWrapping="Wrap" />
                     </StackPanel>
-                    <TextBlock Text="Visualiser et gérer les commandes prévues pour aujourd'hui" TextWrapping="Wrap" />
-                </StackPanel>
-            </Border>
-        </Grid>
-    </StackPanel>
-</ScrollViewer>
+                </Border>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>
