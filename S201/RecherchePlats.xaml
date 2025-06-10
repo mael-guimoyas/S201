@@ -45,7 +45,7 @@
                                 Padding="5"
                                 Background="#0078D7"
                                 Content="Rechercher"
-                                Foreground="White" />
+                                Foreground="White" Click="Button_Click_1" />
                             <Button
                                 Grid.Column="3"
                                 Padding="5"
