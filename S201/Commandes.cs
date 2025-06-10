@@ -152,9 +152,6 @@ namespace S201
             return lesCommandes;
         }
 
-
-
-
         public List<Commandes> FindBySelection(string criteres)
         {
             throw new NotImplementedException();
