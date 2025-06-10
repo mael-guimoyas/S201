@@ -1,0 +1,195 @@
+﻿<UserControl
+    x:Class="S201.GestionClients"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:S201"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="600"
+    d:DesignWidth="1200"
+    mc:Ignorable="d">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+
+        <!-- Header avec titre et info utilisateur -->
+        <Grid Grid.Row="0" Background="#4A90E2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" 
+                   Content="SIBILIA - GESTION DES CLIENTS" 
+                   Foreground="White" 
+                   FontWeight="Bold" 
+                   FontSize="16" 
+                   VerticalAlignment="Center" 
+                   Margin="20,0,0,0" />
+
+            <Label Grid.Column="1" 
+                   Content="Connecté en tant que: Pierre Martin (Gestionnaire)" 
+                   Foreground="White" 
+                   FontSize="12" 
+                   VerticalAlignment="Center" 
+                   Margin="0,0,20,0" />
+        </Grid>
+
+        <!-- Navigation tabs -->
+        <Grid Grid.Row="1" Background="#E8E8E8">
+            <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                <Button Content="Commandes" 
+                        Background="Transparent" 
+                        BorderThickness="0" 
+                        Padding="15,10" 
+                        FontSize="12" />
+                <Button Content="Clients" 
+                        Background="White" 
+                        BorderThickness="0,0,0,2" 
+                        BorderBrush="#4A90E2" 
+                        Padding="15,10" 
+                        FontSize="12" 
+                        FontWeight="Bold" />
+                <Button Content="Accueil" 
+                        Background="Transparent" 
+                        BorderThickness="0" 
+                        Padding="15,10" 
+                        FontSize="12" />
+            </StackPanel>
+        </Grid>
+
+        <!-- Section titre et actions -->
+        <Grid Grid.Row="2" Margin="20,10,20,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" 
+                   Content="Gestion des clients" 
+                   FontSize="20" 
+                   FontWeight="Bold" 
+                   VerticalAlignment="Center" />
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <TextBox x:Name="txtRecherche" 
+                         Width="250" 
+                         Height="30" 
+                         Margin="0,0,10,0" 
+                         Padding="8,5" 
+                         VerticalContentAlignment="Center" 
+                         Text="Rechercher un client..." 
+                         Foreground="Gray" />
+                <Button Content="Rechercher" 
+                        Background="#4A90E2" 
+                        Foreground="White" 
+                        Padding="15,5" 
+                        BorderThickness="0" 
+                        Margin="0,0,10,0" />
+                <Button Content="+ Ajouter un client" 
+                        Background="#28A745" 
+                        Foreground="White" 
+                        Padding="15,5" 
+                        BorderThickness="0" />
+            </StackPanel>
+        </Grid>
+
+        <!-- DataGrid des clients -->
+        <Border Grid.Row="3" 
+                Margin="20,0,20,0" 
+                BorderBrush="#E0E0E0" 
+                BorderThickness="1">
+            <DataGrid x:Name="dgClients" 
+                      AutoGenerateColumns="False" 
+                      HeadersVisibility="Column" 
+                      GridLinesVisibility="Horizontal" 
+                      RowHeaderWidth="0" 
+                      Background="White"
+                      AlternatingRowBackground="#F8F9FA">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" 
+                                        Binding="{Binding Id}" 
+                                        Width="80" />
+                    <DataGridTextColumn Header="Nom" 
+                                        Binding="{Binding Nom}" 
+                                        Width="200" />
+                    <DataGridTextColumn Header="Téléphone" 
+                                        Binding="{Binding Telephone}" 
+                                        Width="120" />
+                    <DataGridTextColumn Header="Email" 
+                                        Binding="{Binding Email}" 
+                                        Width="250" />
+                    <DataGridTextColumn Header="Type" 
+                                        Binding="{Binding Type}" 
+                                        Width="120" />
+                    <DataGridTemplateColumn Header="Statut" Width="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border Background="#D4EDDA" 
+                                        CornerRadius="3" 
+                                        Padding="8,2">
+                                    <TextBlock Text="Actif" 
+                                               Foreground="#155724" 
+                                               FontSize="11" 
+                                               FontWeight="SemiBold" 
+                                               HorizontalAlignment="Center" />
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Actions" Width="200">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Content="Modifier" 
+                                            Background="Transparent" 
+                                            Foreground="#007BFF" 
+                                            BorderThickness="0" 
+                                            Padding="8,2" 
+                                            FontSize="12" 
+                                            Margin="0,0,10,0" />
+                                    <Button Content="Commandes" 
+                                            Background="Transparent" 
+                                            Foreground="#007BFF" 
+                                            BorderThickness="0" 
+                                            Padding="8,2" 
+                                            FontSize="12" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+
+                <!-- Les données seront liées depuis le code-behind -->
+            </DataGrid>
+        </Border>
+
+        <!-- Footer -->
+        <Grid Grid.Row="4" Background="#F8F9FA">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" 
+                   Content="128 clients trouvés" 
+                   FontSize="11" 
+                   Foreground="Gray" 
+                   VerticalAlignment="Center" 
+                   Margin="20,0,0,0" />
+
+            <Label Grid.Column="1" 
+                   Content="Version 1.0.1 | © 2023 SIBLIA" 
+                   FontSize="11" 
+                   Foreground="Gray" 
+                   VerticalAlignment="Center" 
+                   Margin="0,0,20,0" />
+        </Grid>
+    </Grid>
+</UserControl>
