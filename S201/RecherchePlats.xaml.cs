@@ -29,5 +29,9 @@ namespace S201
         {
             Conteneur.Content = new CreerPlat();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }
