@@ -53,33 +53,37 @@
             </Grid.ColumnDefinitions>
 
             <Button
+                x:Name="ButAccueil"
                 Grid.Column="0"
                 Padding="15,5"
                 Background="#1976D2"
                 BorderThickness="0"
-                Click="Button_Click_1"
+                Click="ButAccueil_Click"
                 Content="Accueil"
                 FontSize="14"
                 Foreground="White" />
 
             <Button
+                x:Name="ButCom"
                 Grid.Column="1"
                 Padding="15,5"
                 Background="White"
                 BorderThickness="0"
-                Click="Button_Click"
+                Click="ButCom_Click"
                 Content="Commandes"
                 FontSize="14"
                 Foreground="Black" />
 
-            <Button x:Name="btn_clients"
+            <Button
+                x:Name="ButClients"
                 Grid.Column="2"
                 Padding="15,5"
                 Background="White"
                 BorderThickness="0"
+                Click="ButClients_Click"
                 Content="Clients"
                 FontSize="14"
-                Foreground="Black" Click="btn_clients_Click" />
+                Foreground="Black" />
         </Grid>
 
         <ContentControl x:Name="Conteneur" Grid.Row="2" />

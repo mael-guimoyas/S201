@@ -22,17 +22,17 @@ namespace S201
             Conteneur.Content = new Accueuil();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ButCom_Click(object sender, RoutedEventArgs e)
         {
             Conteneur.Content = new voirCommandes();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void ButAccueil_Click(object sender, RoutedEventArgs e)
         {
             Conteneur.Content = new Accueuil();
         }
 
-        private void btn_clients_Click(object sender, RoutedEventArgs e)
+        private void ButClients_Click(object sender, RoutedEventArgs e)
         {
             Conteneur.Content = new GererClients();
         }
