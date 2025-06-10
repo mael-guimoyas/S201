@@ -109,7 +109,22 @@
                     </StackPanel>
                 </Border>
             </StackPanel>
-            <DataGrid Grid.Row="2"></DataGrid>
+            <DataGrid 
+                Margin="5" 
+                Grid.Row="2"
+                AutoGenerateColumns="False"
+                IsReadOnly="True"
+                ItemsSource="{Binding Plat}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding NumPlat}" Header="N° Plat" />
+                    <DataGridTextColumn Binding="{Binding NumSousCatégorie}" Header="N° SousCatégorie" />
+                    <DataGridTextColumn Binding="{Binding NumPeriode}" Header="N° Periode" />
+                    <DataGridTextColumn Binding="{Binding NomPlat}" Header="Nom Plat" />
+                    <DataGridTextColumn Binding="{Binding PrixUnitaire}" Header="Prix Unitaire" />
+                    <DataGridTextColumn Binding="{Binding DelaiPreparation}" Header="Temps Préparation" />
+                    <DataGridTextColumn Binding="{Binding NbPersonnes}" Header="Nb Personnes requise" />
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
     </ScrollViewer>
 </UserControl>
