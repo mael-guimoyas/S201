@@ -99,7 +99,7 @@
             <DataGrid
                 AutoGenerateColumns="False"
                 IsReadOnly="True"
-                ItemsSource="{Binding Commandes}">
+                ItemsSource="{Binding LesCommandes}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding NumCommande}" Header="N° Commande" />
                     <DataGridTextColumn Binding="{Binding DateCommande}" Header="Heure" />

@@ -20,8 +20,12 @@ namespace S201
     /// </summary>
     public partial class voirCommandes : UserControl
     {
+
+        public Commandes UneCommande { get; set; }
+
         public voirCommandes()
         {
+            this.DataContext = UneCommande;
             InitializeComponent();
         }
     }

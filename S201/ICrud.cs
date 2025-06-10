@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace S201
 {
-    internal interface ICrud
+    internal interface ICrud<T>
     {
         public int Create();
 

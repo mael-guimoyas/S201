@@ -12,6 +12,7 @@ namespace S201
     {
         private string id;
         private string nom;
+        private string prenom;
         private string telephone;
         private string email;
         private string type;

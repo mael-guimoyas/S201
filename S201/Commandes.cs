@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 
 namespace S201
 {
-    public class Commandes 
+    public class Commandes: ICrud<Commandes>
     {
         private int numCommande;
+        private int numClient;
+        private int numEmploye;
         private DateTime dateCommande;
         private DateTime dateRetraitCommande;
         private bool estPaye;
@@ -24,8 +26,10 @@ namespace S201
         {
         }
 
-        public Commandes(DateTime dateCommande, DateTime dateRetraitCommande, bool estPaye, bool estRetire, double prixTotal)
+        public Commandes(int numClient, int numEmploye, DateTime dateCommande, DateTime dateRetraitCommande, bool estPaye, bool estRetire, double prixTotal)
         {
+            NumClient = numClient;
+            NumEmploye = numEmploye;
             DateCommande = dateCommande;
             DateRetraitCommande = dateRetraitCommande;
             EstPaye = estPaye;
@@ -33,9 +37,11 @@ namespace S201
             PrixTotal = prixTotal;
         }
 
-        public Commandes(int numCommande, DateTime dateCommande, DateTime dateRetraitCommande, bool estPaye, bool estRetire, double prixTotal)
+        public Commandes(int numCommande, int numClient, int numEmploye, DateTime dateCommande, DateTime dateRetraitCommande, bool estPaye, bool estRetire, double prixTotal)
         {
             NumCommande = numCommande;
+            NumClient = numClient;
+            NumEmploye = numEmploye;
             DateCommande = dateCommande;
             DateRetraitCommande = dateRetraitCommande;
             EstPaye = estPaye;
@@ -48,6 +54,8 @@ namespace S201
         public bool EstPaye { get => estPaye; set => estPaye = value; }
         public bool EstRetire { get => estRetire; set => estRetire = value; }
         public double PrixTotal { get => prixTotal; set => prixTotal = value; }
+        public int NumClient { get => numClient; set => numClient = value; }
+        public int NumEmploye { get => numEmploye; set => numEmploye = value; }
 
         public override bool Equals(object? obj)
         {
@@ -82,12 +90,16 @@ namespace S201
         public int Create()
         {
             int nb = 0;
-            using (var cmdInsert = new NpgsqlCommand("insert into chiens (nom,maitre,poids ) values (@nom,@maitre,@poids) RETURNING idchien"))
+            using (var cmdInsert = new NpgsqlCommand(
+                "INSERT INTO commande (numclient, numemploye, datecommande, dateretraitprevue, payee, retiree, prixtotal) " +
+                "VALUES (@numclient, @numemploye, @datecommande, @dateretraitprevue, @estpaye, @estretire, @prixtotal) RETURNING numcommande"))
             {
+                cmdInsert.Parameters.AddWithValue("numclient", this.NumClient);
+                cmdInsert.Parameters.AddWithValue("numemploye", this.NumEmploye);
                 cmdInsert.Parameters.AddWithValue("datecommande", this.DateCommande);
                 cmdInsert.Parameters.AddWithValue("dateretraitprevue", this.DateRetraitCommande);
-                cmdInsert.Parameters.AddWithValue("payee", this.EstPaye);
-                cmdInsert.Parameters.AddWithValue("retiree", this.EstRetire);
+                cmdInsert.Parameters.AddWithValue("estpaye", this.EstPaye);
+                cmdInsert.Parameters.AddWithValue("estretire", this.EstRetire);
                 cmdInsert.Parameters.AddWithValue("prixtotal", this.PrixTotal);
                 nb = DataAccess.Instance.ExecuteInsert(cmdInsert);
             }
@@ -97,54 +109,57 @@ namespace S201
 
         public void Read()
         {
-            using (var cmdSelect = new NpgsqlCommand("select * from  commande where numcommande =@numcommande;"))
+            using (var cmdSelect = new NpgsqlCommand("select * from commande where numcommande =@numcommande;"))
             {
                 cmdSelect.Parameters.AddWithValue("numcommande", this.NumCommande);
 
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
-                this.DateCommande = (DateTime)dt.Rows[0]["nom"];
-                this.DateRetraitCommande = (DateTime)dt.Rows[0]["maitre"];
-                this.EstPaye = (bool)dt.Rows[0]["poids"];
-                this.EstRetire = (bool)dt.Rows[0]["poids"];
-                this.PrixTotal = (double)dt.Rows[0]["poids"];
-
+                this.NumClient = (int)dt.Rows[0]["numclient"];
+                this.NumEmploye = (int)dt.Rows[0]["numemploye"];
+                this.DateCommande = (DateTime)dt.Rows[0]["datecommande"];
+                this.DateRetraitCommande = (DateTime)dt.Rows[0]["dateretraitprevue"];
+                this.EstPaye = (bool)dt.Rows[0]["payee"];
+                this.EstRetire = (bool)dt.Rows[0]["retiree"];
+                this.PrixTotal = (double)dt.Rows[0]["prixtotal"];
             }
-
         }
 
         public int Update()
         {
             using (var cmdUpdate = new NpgsqlCommand(
-                "UPDATE commande SET datecommande = @datecommande, dateretraitprevue = @dateretraitcommande, " +
-                "estpaye = @estpaye, estretiere = @estretiere, prixtotal = @prixtotal WHERE numcommande = @numcommande;"))
+                "UPDATE commande SET numclient = @numclient, numemploye = @numemploye, datecommande = @datecommande, " +
+                "dateretraitprevue = @dateretraitprevue, payee = @estpaye, retiree = @estretire, " +
+                "prixtotal = @prixtotal WHERE numcommande = @numcommande;"))
             {
-                cmdUpdate.Parameters.AddWithValue("datecommande", this.dateCommande);
-                cmdUpdate.Parameters.AddWithValue("dateretraitcommande", this.dateRetraitCommande);
-                cmdUpdate.Parameters.AddWithValue("estpaye", this.estPaye);
-                cmdUpdate.Parameters.AddWithValue("estretiere", this.estRetire);
-                cmdUpdate.Parameters.AddWithValue("prixtotal", this.prixTotal);
-                cmdUpdate.Parameters.AddWithValue("numcommande", this.numCommande);
+                cmdUpdate.Parameters.AddWithValue("numclient", this.NumClient);
+                cmdUpdate.Parameters.AddWithValue("numemploye", this.NumEmploye);
+                cmdUpdate.Parameters.AddWithValue("datecommande", this.DateCommande);
+                cmdUpdate.Parameters.AddWithValue("dateretraitprevue", this.DateRetraitCommande);
+                cmdUpdate.Parameters.AddWithValue("estpaye", this.EstPaye);
+                cmdUpdate.Parameters.AddWithValue("estretire", this.EstRetire);
+                cmdUpdate.Parameters.AddWithValue("prixtotal", this.PrixTotal);
+                cmdUpdate.Parameters.AddWithValue("numcommande", this.NumCommande);
 
                 return DataAccess.Instance.ExecuteSet(cmdUpdate);
             }
         }
 
-
-
         public List<Commandes> FindAll()
         {
             List<Commandes> lesCommandes = new List<Commandes>();
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("SELECT * FROM commande;"))
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from commande;"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
                 {
                     lesCommandes.Add(new Commandes(
                         (int)dr["numcommande"],
+                        (int)dr["numclient"],
+                        (int)dr["numemploye"],
                         (DateTime)dr["datecommande"],
-                        (DateTime)dr["dateretraitcommande"],
-                        (bool)dr["estpaye"],
-                        (bool)dr["estretire"],
+                        (DateTime)dr["dateretraitprevue"],
+                        (bool)dr["payee"],
+                        (bool)dr["retiree"],
                         (double)dr["prixtotal"]
                     ));
                 }
@@ -159,7 +174,7 @@ namespace S201
 
         public int Delete()
         {
-            using (var cmdUpdate = new NpgsqlCommand("delete from commande  where numcommande =@numcommande;"))
+            using (var cmdUpdate = new NpgsqlCommand("delete from commande where numcommande =@numcommande;"))
             {
                 cmdUpdate.Parameters.AddWithValue("numcommande", this.NumCommande);
                 return DataAccess.Instance.ExecuteSet(cmdUpdate);

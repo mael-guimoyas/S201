@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -14,12 +15,32 @@ namespace S201
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+    /// 
     public partial class MainWindow : Window
     {
+        public ListeCommande LesCommandes { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+            ChargeData();
             Conteneur.Content = new Accueuil();
+        }
+
+        public void ChargeData()
+        {
+            try
+            {
+                LesCommandes = new ListeCommande("liste principale");
+                this.DataContext = LesCommandes;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur : " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                Application.Current.Shutdown();
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
