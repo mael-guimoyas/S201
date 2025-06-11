@@ -54,8 +54,8 @@ namespace S201
 
         private void rechercheClient_TextChanged(object sender, TextChangedEventArgs e)
         {
-           /* CollectionViewSource.GetDefaultView(dgCommande.ItemsSource).Refresh();
-            dgCommande.Items.Filter = RechercheMotClefChien;*/
+            CollectionViewSource.GetDefaultView(dgCommande.ItemsSource).Refresh();
+            dgCommande.Items.Filter = RechercheClient;
         }
     }
 }
