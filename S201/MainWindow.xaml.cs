@@ -19,6 +19,7 @@ namespace S201
         public MainWindow()
         {
             InitializeComponent();
+
             Conteneur.Content = new Accueuil();
         }
 
