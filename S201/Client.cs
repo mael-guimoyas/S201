@@ -10,242 +10,154 @@ namespace S201
 {
     public class Client
     {
-        private string id;
-        private string nom;
-        private string prenom;
-        private string telephone;
-        private string email;
-        private string type;
-        private bool actif;
-
-        public Client(string id)
-        {
-            this.Id = id;
-        }
+        private int numclient;
+        private string nomclient;
+        private string prenomclient;
+        private string tel;
+        private string adresserue;
+        private string adressecp;
+        private string adresseville;
 
         public Client()
         {
         }
 
-        public Client(string nom, string telephone, string email, string type, bool actif)
+        public Client(int numclient, string nomclient, string prenomclient, string tel, string adresserue, string adressecp, string adresseville)
         {
-            Nom = nom;
-            Telephone = telephone;
-            Email = email;
-            Type = type;
-            Actif = actif;
+            Numclient = numclient;
+            Nomclient = nomclient;
+            Prenomclient = prenomclient;
+            Tel = tel;
+            Adresserue = adresserue;
+            Adressecp = adressecp;
+            Adresseville = adresseville;
         }
 
-        public Client(string id, string nom, string telephone, string email, string type, bool actif)
-        {
-            Id = id;
-            Nom = nom;
-            Telephone = telephone;
-            Email = email;
-            Type = type;
-            Actif = actif;
-        }
-
-        public string Id { get => id; set => id = value; }
-        public string Nom { get => nom; set => nom = value; }
-        public string Telephone { get => telephone; set => telephone = value; }
-        public string Email { get => email; set => email = value; }
-        public string Type { get => type; set => type = value; }
-        public bool Actif { get => actif; set => actif = value; }
-
-        public override bool Equals(object? obj)
-        {
-            return obj is Client client &&
-                   Id == client.Id &&
-                   Nom == client.Nom &&
-                   Telephone == client.Telephone &&
-                   Email == client.Email &&
-                   Type == client.Type &&
-                   Actif == client.Actif;
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(Id, Nom, Telephone, Email, Type, Actif);
-        }
-
-        public override string? ToString()
-        {
-            return $"{Id} - {Nom} ({Type})";
-        }
-
-        public static bool operator ==(Client? left, Client? right)
-        {
-            return EqualityComparer<Client>.Default.Equals(left, right);
-        }
-
-        public static bool operator !=(Client? left, Client? right)
-        {
-            return !(left == right);
-        }
-
-        public string Create()
-        {
-            string newId = "";
-            using (var cmdInsert = new NpgsqlCommand("INSERT INTO client (nom, telephone, email, type, actif) VALUES (@nom, @telephone, @email, @type, @actif) RETURNING id"))
-            {
-                cmdInsert.Parameters.AddWithValue("nom", this.Nom);
-                cmdInsert.Parameters.AddWithValue("telephone", this.Telephone);
-                cmdInsert.Parameters.AddWithValue("email", this.Email);
-                cmdInsert.Parameters.AddWithValue("type", this.Type);
-                cmdInsert.Parameters.AddWithValue("actif", this.Actif);
-
-                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdInsert);
-                if (dt.Rows.Count > 0)
-                {
-                    newId = dt.Rows[0]["id"].ToString();
-                    this.Id = newId;
-                }
-            }
-            return newId;
-        }
-
-        public void Read()
-        {
-            using (var cmdSelect = new NpgsqlCommand("SELECT * FROM client WHERE id = @id;"))
-            {
-                cmdSelect.Parameters.AddWithValue("id", this.Id);
-
-                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
-                if (dt.Rows.Count > 0)
-                {
-                    this.Nom = dt.Rows[0]["nom"].ToString();
-                    this.Telephone = dt.Rows[0]["telephone"].ToString();
-                    this.Email = dt.Rows[0]["email"].ToString();
-                    this.Type = dt.Rows[0]["type"].ToString();
-                    this.Actif = (bool)dt.Rows[0]["actif"];
-                }
-            }
-        }
-
-        public int Update()
-        {
-            using (var cmdUpdate = new NpgsqlCommand(
-                "UPDATE client SET nom = @nom, telephone = @telephone, email = @email, " +
-                "type = @type, actif = @actif WHERE id = @id;"))
-            {
-                cmdUpdate.Parameters.AddWithValue("nom", this.Nom);
-                cmdUpdate.Parameters.AddWithValue("telephone", this.Telephone);
-                cmdUpdate.Parameters.AddWithValue("email", this.Email);
-                cmdUpdate.Parameters.AddWithValue("type", this.Type);
-                cmdUpdate.Parameters.AddWithValue("actif", this.Actif);
-                cmdUpdate.Parameters.AddWithValue("id", this.Id);
-
-                return DataAccess.Instance.ExecuteSet(cmdUpdate);
-            }
-        }
+        public int Numclient { get => numclient; set => numclient = value; }
+        public string Nomclient { get => nomclient; set => nomclient = value; }
+        public string Prenomclient { get => prenomclient; set => prenomclient = value; }
+        public string Tel { get => tel; set => tel = value; }
+        public string Adresserue { get => adresserue; set => adresserue = value; }
+        public string Adressecp { get => adressecp; set => adressecp = value; }
+        public string Adresseville { get => adresseville; set => adresseville = value; }
 
         public List<Client> FindAll()
         {
-            List<Client> lesClients = new List<Client>();
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("SELECT * FROM client ORDER BY nom;"))
+            List<Client> lesChiens = new List<Client>();
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from client ;"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
-                {
-                    lesClients.Add(new Client(
-                        dr["id"].ToString(),
-                        dr["nom"].ToString(),
-                        dr["telephone"].ToString(),
-                        dr["email"].ToString(),
-                        dr["type"].ToString(),
-                        (bool)dr["actif"]
-                    ));
-                }
+                    lesChiens.Add(new Client((Int32)dr["numclient"], (String)dr["nomclient"],
+                   (String)dr["prenomclient"], (String)dr["tel"], (String)dr["adresserue"], (String)dr["adressecp"], (String)dr["adresseville"]));
             }
-            return lesClients;
+            return lesChiens;
         }
-
-        public List<Client> FindByNom(string nom)
+        public Client FindById(int id)
         {
-            List<Client> lesClients = new List<Client>();
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("SELECT * FROM client WHERE nom ILIKE @nom ORDER BY nom;"))
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("SELECT * FROM client WHERE numclient = @id"))
             {
-                cmdSelect.Parameters.AddWithValue("nom", $"%{nom}%");
+                cmdSelect.Parameters.AddWithValue("@id", id);
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
-                foreach (DataRow dr in dt.Rows)
+
+                if (dt.Rows.Count > 0)
                 {
-                    lesClients.Add(new Client(
-                        dr["id"].ToString(),
-                        dr["nom"].ToString(),
-                        dr["telephone"].ToString(),
-                        dr["email"].ToString(),
-                        dr["type"].ToString(),
-                        (bool)dr["actif"]
-                    ));
+                    DataRow dr = dt.Rows[0];
+                    return new Client(
+                        (int)dr["numclient"],
+                        (String)dr["nomclient"],
+                        (String)dr["prenomclient"],
+                        (String)dr["tel"],
+                        (String)dr["adresserue"],
+                        (String)dr["adressecp"],
+                        (String)dr["adresseville"]
+                    );
+                }
+                return null; // Client non trouvé
+            }
+        }
+        public bool Create()
+        {
+            try
+            {
+                using (NpgsqlCommand cmdInsert = new NpgsqlCommand(
+                    "INSERT INTO client (nomclient, prenomclient, tel, adresserue, adressecp, adresseville) " +
+                    "VALUES (@nomclient, @prenomclient, @tel, @adresserue, @adressecp, @adresseville)"))
+                {
+                    // Ajout des paramètres
+                    cmdInsert.Parameters.AddWithValue("@nomclient", this.Nomclient ?? "");
+                    cmdInsert.Parameters.AddWithValue("@prenomclient", this.Prenomclient ?? "");
+                    cmdInsert.Parameters.AddWithValue("@tel", this.Tel ?? "");
+                    cmdInsert.Parameters.AddWithValue("@adresserue", this.Adresserue ?? "");
+                    cmdInsert.Parameters.AddWithValue("@adressecp", this.Adressecp ?? "");
+                    cmdInsert.Parameters.AddWithValue("@adresseville", this.Adresseville ?? "");
+
+                    // Si ExecuteSelect est la seule méthode disponible, on peut faire un insert puis vérifier
+                    // En utilisant RETURNING pour récupérer l'ID du client créé
+                    cmdInsert.CommandText = "INSERT INTO client (nomclient, prenomclient, tel, adresserue, adressecp, adresseville) " +
+                                           "VALUES (@nomclient, @prenomclient, @tel, @adresserue, @adressecp, @adresseville) RETURNING numclient";
+
+                    DataTable dt = DataAccess.Instance.ExecuteSelect(cmdInsert);
+
+                    // Si on a récupéré un ID, c'est que l'insertion a réussi
+                    if (dt.Rows.Count > 0)
+                    {
+                        // Optionnel : récupérer l'ID généré
+                        this.Numclient = (int)dt.Rows[0]["numclient"];
+                        return true;
+                    }
+
+                    return false;
                 }
             }
-            return lesClients;
-        }
-
-        public List<Client> FindByType(string type)
-        {
-            List<Client> lesClients = new List<Client>();
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("SELECT * FROM client WHERE type = @type ORDER BY nom;"))
+            catch (Exception ex)
             {
-                cmdSelect.Parameters.AddWithValue("type", type);
-                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
-                foreach (DataRow dr in dt.Rows)
+                // Log de l'erreur pour le débogage
+                System.Diagnostics.Debug.WriteLine($"Erreur lors de la création du client : {ex.Message}");
+                return false;
+            }
+        }
+        public bool Update()
+        {
+            try
+            {
+                using (NpgsqlCommand cmdUpdate = new NpgsqlCommand(
+                    "UPDATE client SET nomclient = @nomclient, prenomclient = @prenomclient, " +
+                    "tel = @tel, adresserue = @adresserue, adressecp = @adressecp, " +
+                    "adresseville = @adresseville WHERE numclient = @numclient"))
                 {
-                    lesClients.Add(new Client(
-                        dr["id"].ToString(),
-                        dr["nom"].ToString(),
-                        dr["telephone"].ToString(),
-                        dr["email"].ToString(),
-                        dr["type"].ToString(),
-                        (bool)dr["actif"]
-                    ));
+                    // Ajout des paramètres
+                    cmdUpdate.Parameters.AddWithValue("@nomclient", this.Nomclient ?? "");
+                    cmdUpdate.Parameters.AddWithValue("@prenomclient", this.Prenomclient ?? "");
+                    cmdUpdate.Parameters.AddWithValue("@tel", this.Tel ?? "");
+                    cmdUpdate.Parameters.AddWithValue("@adresserue", this.Adresserue ?? "");
+                    cmdUpdate.Parameters.AddWithValue("@adressecp", this.Adressecp ?? "");
+                    cmdUpdate.Parameters.AddWithValue("@adresseville", this.Adresseville ?? "");
+                    cmdUpdate.Parameters.AddWithValue("@numclient", this.Numclient);
+
+                    // Utiliser une requête SELECT pour vérifier si la mise à jour a fonctionné
+                    // En utilisant une requête qui retourne le nombre de lignes affectées
+                    cmdUpdate.CommandText = "UPDATE client SET nomclient = @nomclient, prenomclient = @prenomclient, " +
+                                           "tel = @tel, adresserue = @adresserue, adressecp = @adressecp, " +
+                                           "adresseville = @adresseville WHERE numclient = @numclient; " +
+                                           "SELECT 1 as success WHERE EXISTS(SELECT 1 FROM client WHERE numclient = @numclient)";
+
+                    DataTable dt = DataAccess.Instance.ExecuteSelect(cmdUpdate);
+
+                    // Si on a des résultats, c'est que la mise à jour a réussi
+                    return dt.Rows.Count > 0;
                 }
             }
-            return lesClients;
-        }
-
-        public List<Client> FindBySelection(string criteres)
-        {
-            List<Client> lesClients = new List<Client>();
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand($"SELECT * FROM client WHERE {criteres} ORDER BY nom;"))
+            catch (Exception ex)
             {
-                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
-                foreach (DataRow dr in dt.Rows)
-                {
-                    lesClients.Add(new Client(
-                        dr["id"].ToString(),
-                        dr["nom"].ToString(),
-                        dr["telephone"].ToString(),
-                        dr["email"].ToString(),
-                        dr["type"].ToString(),
-                        (bool)dr["actif"]
-                    ));
-                }
-            }
-            return lesClients;
-        }
-
-        public int Delete()
-        {
-            using (var cmdDelete = new NpgsqlCommand("DELETE FROM client WHERE id = @id;"))
-            {
-                cmdDelete.Parameters.AddWithValue("id", this.Id);
-                return DataAccess.Instance.ExecuteSet(cmdDelete);
+                // Log de l'erreur pour le débogage
+                System.Diagnostics.Debug.WriteLine($"Erreur lors de la mise à jour du client : {ex.Message}");
+                return false;
             }
         }
 
-        public int DesactiverClient()
-        {
-            this.Actif = false;
-            return this.Update();
-        }
 
-        public int ActiverClient()
-        {
-            this.Actif = true;
-            return this.Update();
-        }
+
     }
 }
 
