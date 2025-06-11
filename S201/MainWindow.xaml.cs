@@ -87,8 +87,7 @@ namespace S201
 
         private void ButComm_Click(object sender, RoutedEventArgs e)
         {
-            Commandes uneCommande = new Commandes();
-            Conteneur.Content = new voirCommandes(uneCommande);
+            Conteneur.Content = new voirCommandes();
             ButComm.Background = new SolidColorBrush(Color.FromRgb(25, 118, 210));
             ButComm.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
             ButAccueil.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));

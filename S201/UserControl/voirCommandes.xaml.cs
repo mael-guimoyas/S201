@@ -22,9 +22,8 @@ namespace S201
     {
         public ListeCommande LesCommandes { get; set; }
 
-        public voirCommandes(Commandes UneCommande)
+        public voirCommandes()
         {
-            this.DataContext = UneCommande;
             InitializeComponent();
             ChargeData();
         }
@@ -44,18 +43,18 @@ namespace S201
             }
         }
 
-        private bool RechercheClient(object obj)
+       /* private bool RechercheClient(object obj)
         {
             if (String.IsNullOrEmpty(rechercheClient.Text))
                 return true;
             Commandes uneCommande = obj as Commandes;
             return uneCommande.NumClient.ToString().StartsWith(rechercheClient.Text, StringComparison.OrdinalIgnoreCase);
-        }
+        }*/
 
         private void rechercheClient_TextChanged(object sender, TextChangedEventArgs e)
         {
-            CollectionViewSource.GetDefaultView(dgCommande.ItemsSource).Refresh();
-            dgCommande.Items.Filter = RechercheClient;
+           /* CollectionViewSource.GetDefaultView(dgCommande.ItemsSource).Refresh();
+            dgCommande.Items.Filter = RechercheClient;*/
         }
     }
 }
