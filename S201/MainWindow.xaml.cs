@@ -57,7 +57,7 @@ namespace S201
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(this, "Le chien n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(this, "Le chien n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
 
@@ -93,7 +93,7 @@ namespace S201
             ButComm.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
             ButAccueil.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
             ButAccueil.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
-            ButClients.Background = new SolidColorBrush(Color.FromRgb(25, 115, 210));
+            ButClients.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
             ButClients.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
         }
     }
