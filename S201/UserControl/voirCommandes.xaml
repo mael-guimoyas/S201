@@ -107,6 +107,17 @@
                 AutoGenerateColumns="False"
                 IsReadOnly="True"
                 ItemsSource="{Binding LesCommandes}">
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="#F5F5F5" />
+                        <Setter Property="Foreground" Value="#333" />
+                        <Setter Property="FontWeight" Value="SemiBold" />
+                        <Setter Property="Padding" Value="12,8" />
+                        <Setter Property="BorderBrush" Value="#E0E0E0" />
+                        <Setter Property="BorderThickness" Value="0,0,1,1" />
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Width="*"
