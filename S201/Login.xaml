@@ -1,0 +1,51 @@
+﻿<Window
+    x:Class="S201.Login"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:S201"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Login"
+    Width="800"
+    Height="450"
+    Background="#85b5ff"
+    mc:Ignorable="d">
+    <Border Margin="144,80,144,80">
+        <Grid Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Border
+                Height="100"
+                Background="#2196F3"
+                BorderBrush="Black"
+                BorderThickness="0" />
+            <Label
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Content="Connexion A Sibilia"
+                FontSize="16"
+                FontWeight="Bold"
+                Foreground="White" />
+            <StackPanel Grid.Row="1">
+                <Label Content="identifiant" />
+                <TextBox Margin="10" />
+            </StackPanel>
+            <StackPanel Grid.Row="2">
+                <Label Content="Mot de passe" />
+                <TextBox Margin="10" />
+            </StackPanel>
+            <Button
+                Grid.Row="3"
+                Margin="114,30,114,30"
+                Background="#2196F3"
+                BorderThickness="0"
+                Content="SE CONNECTER"
+                FontWeight="Bold"
+                Foreground="White" />
+        </Grid>
+    </Border>
+</Window>

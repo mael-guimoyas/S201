@@ -117,25 +117,27 @@
 
                 <DataGrid.Columns>
                     <DataGridTextColumn
-                        Width="100"
+                        Width="50"
                         Binding="{Binding Id}"
                         Header="ID" />
                     <DataGridTextColumn
-                        Width="220"
+                        Width="120"
                         Binding="{Binding Nom}"
                         Header="Nom" />
                     <DataGridTextColumn
-                        Width="140"
+                        Width="130"
                         Binding="{Binding Telephone}"
                         Header="Téléphone" />
                     <DataGridTextColumn
-                        Width="280"
+                        Width="150"
                         Binding="{Binding Email}"
                         Header="Email" />
                     <DataGridTextColumn
-                        Width="120"
+                        Width="80"
                         Binding="{Binding Type}"
                         Header="Type" />
+
+
                     <DataGridTemplateColumn Width="100" Header="Statut">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

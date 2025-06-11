@@ -66,11 +66,23 @@ namespace S201
         private void ButAccueil_Click(object sender, RoutedEventArgs e)
         {
             Conteneur.Content = new Accueuil();
+            ButComm.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            ButComm.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            ButAccueil.Background = new SolidColorBrush(Color.FromRgb(25, 118, 210));
+            ButAccueil.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            ButClients.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            ButClients.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
         }
 
         private void ButClients_Click(object sender, RoutedEventArgs e)
         {
             Conteneur.Content = new GererClients();
+            ButComm.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            ButComm.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            ButAccueil.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            ButAccueil.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            ButClients.Background = new SolidColorBrush(Color.FromRgb(25, 115, 210));
+            ButClients.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
         }
 
         private void ButCom_Click(object sender, RoutedEventArgs e)
