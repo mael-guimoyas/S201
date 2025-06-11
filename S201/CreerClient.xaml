@@ -1,0 +1,133 @@
+﻿<Window x:Class="S201.CreerClient"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:S201"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- En-tête -->
+        <Border Grid.Row="0" Background="#2196F3" Padding="20,15">
+            <TextBlock Text="Créer un nouveau client" 
+                      FontSize="24" 
+                      FontWeight="Bold" 
+                      Foreground="White"
+                      HorizontalAlignment="Center"/>
+        </Border>
+
+        <!-- Formulaire -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="20">
+            <StackPanel MaxWidth="500">
+
+                <!-- Nom -->
+                <Label Content="Nom *" FontWeight="Bold" Margin="0,10,0,5"/>
+                <TextBox x:Name="txtNom" 
+                        Height="35" 
+                        FontSize="14"
+                        Padding="10,0"
+                        BorderBrush="#CCCCCC"
+                        BorderThickness="1"/>
+
+                <!-- Prénom -->
+                <Label Content="Prénom *" FontWeight="Bold" Margin="0,10,0,5"/>
+                <TextBox x:Name="txtPrenom" 
+                        Height="35" 
+                        FontSize="14"
+                        Padding="10,0"
+                        BorderBrush="#CCCCCC"
+                        BorderThickness="1"/>
+
+                <!-- Téléphone -->
+                <Label Content="Téléphone *" FontWeight="Bold" Margin="0,10,0,5"/>
+                <TextBox x:Name="txtTelephone" 
+                        Height="35" 
+                        FontSize="14"
+                        Padding="10,0"
+                        BorderBrush="#CCCCCC"
+                        BorderThickness="1"/>
+
+                <!-- Rue -->
+                <Label Content="Rue *" FontWeight="Bold" Margin="0,10,0,5"/>
+                <TextBox x:Name="txtRue" 
+                        Height="35" 
+                        FontSize="14"
+                        Padding="10,0"
+                        BorderBrush="#CCCCCC"
+                        BorderThickness="1"/>
+
+                <!-- Code Postal -->
+                <Label Content="Code Postal *" FontWeight="Bold" Margin="0,10,0,5"/>
+                <TextBox x:Name="txtCodePostal" 
+                        Height="35" 
+                        FontSize="14"
+                        Padding="10,0"
+                        BorderBrush="#CCCCCC"
+                        BorderThickness="1"/>
+
+                <!-- Ville -->
+                <Label Content="Ville *" FontWeight="Bold" Margin="0,10,0,5"/>
+                <TextBox x:Name="txtVille" 
+                        Height="35" 
+                        FontSize="14"
+                        Padding="10,0"
+                        BorderBrush="#CCCCCC"
+                        BorderThickness="1"/>
+
+                <!-- Statut -->
+                <Label Content="Statut" FontWeight="Bold" Margin="0,10,0,5"/>
+                <ComboBox x:Name="cmbStatut" 
+                         Height="35" 
+                         FontSize="14"
+                         Padding="10,0"
+                         BorderBrush="#CCCCCC"
+                         BorderThickness="1">
+                    <ComboBoxItem Content="Actif" IsSelected="True"/>
+                    <ComboBoxItem Content="Inactif"/>
+                </ComboBox>
+
+                <!-- Note obligatoire -->
+                <TextBlock Text="* Champs obligatoires" 
+                          FontStyle="Italic" 
+                          Foreground="Gray" 
+                          Margin="0,15,0,0"/>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Boutons -->
+        <Border Grid.Row="2" Background="#F5F5F5" Padding="20">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="btnAnnuler" 
+                       Content="Annuler" 
+                       Width="100" 
+                       Height="35" 
+                       Margin="0,0,10,0"
+                       Background="#6C757D"
+                       Foreground="White"
+                       BorderThickness="0"
+                       FontSize="14"
+                       Cursor="Hand"
+                       Click="btnAnnuler_Click"/>
+
+                <Button x:Name="btnEnregistrer" 
+                       Content="Enregistrer" 
+                       Width="120" 
+                       Height="35" 
+                       Background="#28A745"
+                       Foreground="White"
+                       BorderThickness="0"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       Cursor="Hand"
+                       Click="btnEnregistrer_Click"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

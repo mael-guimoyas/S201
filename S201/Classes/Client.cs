@@ -10,179 +10,154 @@ namespace S201
 {
     public class Client
     {
-        private string id;
-        private string nom;
-        private string prenom;
-        private string telephone;
-        private string adresseRue;
-        private string adresseCp;
-        private string adresseVille;
-
-        public Client(string id)
-        {
-            this.Id = id;
-        }
+        private int numclient;
+        private string nomclient;
+        private string prenomclient;
+        private string tel;
+        private string adresserue;
+        private string adressecp;
+        private string adresseville;
 
         public Client()
         {
         }
 
-        public Client(string nom, string prenom, string telephone,
-                 string adresseRue, string adresseCp, string adresseVille)
+        public Client(int numclient, string nomclient, string prenomclient, string tel, string adresserue, string adressecp, string adresseville)
         {
-            Nom = nom;
-            Prenom = prenom;
-            Telephone = telephone;
-            AdresseRue = adresseRue;
-            AdresseCp = adresseCp;
-            AdresseVille = adresseVille;
+            Numclient = numclient;
+            Nomclient = nomclient;
+            Prenomclient = prenomclient;
+            Tel = tel;
+            Adresserue = adresserue;
+            Adressecp = adressecp;
+            Adresseville = adresseville;
         }
 
-        public Client(string id, string nom, string prenom, string telephone, 
-                 string adresseRue, string adresseCp, string adresseVille)
-        {
-            Id = id;
-            Nom = nom;
-            Prenom = prenom;
-            Telephone = telephone;
-            AdresseRue = adresseRue;
-            AdresseCp = adresseCp;
-            AdresseVille = adresseVille;
-        }
-
-        public string Id { get => id; set => id = value; }
-        public string Nom { get => nom; set => nom = value; }
-        public string Prenom { get => prenom; set => prenom = value; }
-        public string Telephone { get => telephone; set => telephone = value; }
-        public string AdresseRue { get => adresseRue; set => adresseRue = value; }
-        public string AdresseCp { get => adresseCp; set => adresseCp = value; }
-        public string AdresseVille { get => adresseVille; set => adresseVille = value; }
-
-        public override bool Equals(object? obj)
-        {
-            return obj is Client client &&
-                   Id == client.Id &&
-                   Nom == client.Nom &&
-                   Prenom == client.Prenom &&
-                   Telephone == client.Telephone &&
-                   AdresseRue == client.AdresseRue &&
-                   AdresseCp == client.AdresseCp &&
-                   AdresseVille == client.AdresseVille;
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(Id, Nom, Prenom, Telephone, AdresseRue, AdresseCp, AdresseVille);
-        }
-
-        public override string? ToString()
-        {
-            return $"{Id} - {Nom} {Prenom}";
-        }
-
-        public static bool operator ==(Client? left, Client? right)
-        {
-            return EqualityComparer<Client>.Default.Equals(left, right);
-        }
-
-        public static bool operator !=(Client? left, Client? right)
-        {
-            return !(left == right);
-        }
-
-        public string Create()
-        {
-            string newId = "";
-            using (var cmdInsert = new NpgsqlCommand(
-                "INSERT INTO client (nomclient, prenomclient, tel, adresserue, adressecp, adresseville) " +
-                "VALUES (@nom, @prenom, @telephone, @adresseRue, @adresseCp, @adresseVille) RETURNING numclient"))
-            {
-                cmdInsert.Parameters.AddWithValue("nom", this.nom);
-                cmdInsert.Parameters.AddWithValue("prenom", this.prenom);
-                cmdInsert.Parameters.AddWithValue("telephone", this.telephone);
-                cmdInsert.Parameters.AddWithValue("adresseRue", this.adresseRue ?? (object)DBNull.Value);
-                cmdInsert.Parameters.AddWithValue("adresseCp", this.adresseCp ?? (object)DBNull.Value);
-                cmdInsert.Parameters.AddWithValue("adresseVille", this.adresseVille ?? (object)DBNull.Value);
-
-                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdInsert);
-                if (dt.Rows.Count > 0)
-                {
-                    newId = dt.Rows[0]["numclient"].ToString();
-                    this.id = newId;
-                }
-            }
-            return newId;
-        }
-
-        public void Read()
-        {
-            using (var cmdSelect = new NpgsqlCommand("SELECT * FROM client WHERE numclient = @id;"))
-            {
-                cmdSelect.Parameters.AddWithValue("id", this.id);
-
-                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
-                if (dt.Rows.Count > 0)
-                {
-                    this.nom = dt.Rows[0]["nomclient"].ToString();
-                    this.prenom = dt.Rows[0]["prenomclient"].ToString();
-                    this.telephone = dt.Rows[0]["tel"].ToString();
-                    this.adresseRue = dt.Rows[0]["adresserue"]?.ToString() ?? string.Empty;
-                    this.adresseCp = dt.Rows[0]["adressecp"]?.ToString() ?? string.Empty;
-                    this.adresseVille = dt.Rows[0]["adresseville"]?.ToString() ?? string.Empty;
-                }
-            }
-        }
-
-        public int Update()
-        {
-            using (var cmdUpdate = new NpgsqlCommand(
-                "UPDATE client SET nomclient = @nom, prenomclient = @prenom, tel = @telephone, " +
-                "adresserue = @adresseRue, adressecp = @adresseCp, " +
-                "adresseville = @adresseVille " +
-                "WHERE numclient = @id;"))
-            {
-                cmdUpdate.Parameters.AddWithValue("nom", this.nom);
-                cmdUpdate.Parameters.AddWithValue("prenom", this.prenom);
-                cmdUpdate.Parameters.AddWithValue("telephone", this.telephone);
-                cmdUpdate.Parameters.AddWithValue("adresseRue", this.adresseRue ?? (object)DBNull.Value);
-                cmdUpdate.Parameters.AddWithValue("adresseCp", this.adresseCp ?? (object)DBNull.Value);
-                cmdUpdate.Parameters.AddWithValue("adresseVille", this.adresseVille ?? (object)DBNull.Value);
-                cmdUpdate.Parameters.AddWithValue("id", this.id);
-
-                return DataAccess.Instance.ExecuteSet(cmdUpdate);
-            }
-        }
+        public int Numclient { get => numclient; set => numclient = value; }
+        public string Nomclient { get => nomclient; set => nomclient = value; }
+        public string Prenomclient { get => prenomclient; set => prenomclient = value; }
+        public string Tel { get => tel; set => tel = value; }
+        public string Adresserue { get => adresserue; set => adresserue = value; }
+        public string Adressecp { get => adressecp; set => adressecp = value; }
+        public string Adresseville { get => adresseville; set => adresseville = value; }
 
         public List<Client> FindAll()
         {
-            List<Client> lesClients = new List<Client>();
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("SELECT * FROM client ORDER BY nomclient;"))
+            List<Client> lesChiens = new List<Client>();
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from client ;"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
+                    lesChiens.Add(new Client((Int32)dr["numclient"], (String)dr["nomclient"],
+                   (String)dr["prenomclient"], (String)dr["tel"], (String)dr["adresserue"], (String)dr["adressecp"], (String)dr["adresseville"]));
+            }
+            return lesChiens;
+        }
+        public Client FindById(int id)
+        {
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("SELECT * FROM client WHERE numclient = @id"))
+            {
+                cmdSelect.Parameters.AddWithValue("@id", id);
+                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
+
+                if (dt.Rows.Count > 0)
                 {
-                    lesClients.Add(new Client(
-                        dr["numclient"].ToString(),
-                        dr["nomclient"].ToString(),
-                        dr["prenomclient"].ToString(),
-                        dr["tel"].ToString(),
-                        dr["adresserue"]?.ToString() ?? string.Empty,
-                        dr["adressecp"]?.ToString() ?? string.Empty,
-                        dr["adresseville"]?.ToString() ?? string.Empty
-                    ));
+                    DataRow dr = dt.Rows[0];
+                    return new Client(
+                        (int)dr["numclient"],
+                        (String)dr["nomclient"],
+                        (String)dr["prenomclient"],
+                        (String)dr["tel"],
+                        (String)dr["adresserue"],
+                        (String)dr["adressecp"],
+                        (String)dr["adresseville"]
+                    );
+                }
+                return null; // Client non trouvé
+            }
+        }
+        public bool Create()
+        {
+            try
+            {
+                using (NpgsqlCommand cmdInsert = new NpgsqlCommand(
+                    "INSERT INTO client (nomclient, prenomclient, tel, adresserue, adressecp, adresseville) " +
+                    "VALUES (@nomclient, @prenomclient, @tel, @adresserue, @adressecp, @adresseville)"))
+                {
+                    // Ajout des paramètres
+                    cmdInsert.Parameters.AddWithValue("@nomclient", this.Nomclient ?? "");
+                    cmdInsert.Parameters.AddWithValue("@prenomclient", this.Prenomclient ?? "");
+                    cmdInsert.Parameters.AddWithValue("@tel", this.Tel ?? "");
+                    cmdInsert.Parameters.AddWithValue("@adresserue", this.Adresserue ?? "");
+                    cmdInsert.Parameters.AddWithValue("@adressecp", this.Adressecp ?? "");
+                    cmdInsert.Parameters.AddWithValue("@adresseville", this.Adresseville ?? "");
+
+                    // Si ExecuteSelect est la seule méthode disponible, on peut faire un insert puis vérifier
+                    // En utilisant RETURNING pour récupérer l'ID du client créé
+                    cmdInsert.CommandText = "INSERT INTO client (nomclient, prenomclient, tel, adresserue, adressecp, adresseville) " +
+                                           "VALUES (@nomclient, @prenomclient, @tel, @adresserue, @adressecp, @adresseville) RETURNING numclient";
+
+                    DataTable dt = DataAccess.Instance.ExecuteSelect(cmdInsert);
+
+                    // Si on a récupéré un ID, c'est que l'insertion a réussi
+                    if (dt.Rows.Count > 0)
+                    {
+                        // Optionnel : récupérer l'ID généré
+                        this.Numclient = (int)dt.Rows[0]["numclient"];
+                        return true;
+                    }
+
+                    return false;
                 }
             }
-            return lesClients;
-        }
-
-        public int Delete()
-        {
-            using (var cmdDelete = new NpgsqlCommand("DELETE FROM client WHERE id = @id;"))
+            catch (Exception ex)
             {
-                cmdDelete.Parameters.AddWithValue("id", this.Id);
-                return DataAccess.Instance.ExecuteSet(cmdDelete);
+                // Log de l'erreur pour le débogage
+                System.Diagnostics.Debug.WriteLine($"Erreur lors de la création du client : {ex.Message}");
+                return false;
             }
         }
+        public bool Update()
+        {
+            try
+            {
+                using (NpgsqlCommand cmdUpdate = new NpgsqlCommand(
+                    "UPDATE client SET nomclient = @nomclient, prenomclient = @prenomclient, " +
+                    "tel = @tel, adresserue = @adresserue, adressecp = @adressecp, " +
+                    "adresseville = @adresseville WHERE numclient = @numclient"))
+                {
+                    // Ajout des paramètres
+                    cmdUpdate.Parameters.AddWithValue("@nomclient", this.Nomclient ?? "");
+                    cmdUpdate.Parameters.AddWithValue("@prenomclient", this.Prenomclient ?? "");
+                    cmdUpdate.Parameters.AddWithValue("@tel", this.Tel ?? "");
+                    cmdUpdate.Parameters.AddWithValue("@adresserue", this.Adresserue ?? "");
+                    cmdUpdate.Parameters.AddWithValue("@adressecp", this.Adressecp ?? "");
+                    cmdUpdate.Parameters.AddWithValue("@adresseville", this.Adresseville ?? "");
+                    cmdUpdate.Parameters.AddWithValue("@numclient", this.Numclient);
+
+                    // Utiliser une requête SELECT pour vérifier si la mise à jour a fonctionné
+                    // En utilisant une requête qui retourne le nombre de lignes affectées
+                    cmdUpdate.CommandText = "UPDATE client SET nomclient = @nomclient, prenomclient = @prenomclient, " +
+                                           "tel = @tel, adresserue = @adresserue, adressecp = @adressecp, " +
+                                           "adresseville = @adresseville WHERE numclient = @numclient; " +
+                                           "SELECT 1 as success WHERE EXISTS(SELECT 1 FROM client WHERE numclient = @numclient)";
+
+                    DataTable dt = DataAccess.Instance.ExecuteSelect(cmdUpdate);
+
+                    // Si on a des résultats, c'est que la mise à jour a réussi
+                    return dt.Rows.Count > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log de l'erreur pour le débogage
+                System.Diagnostics.Debug.WriteLine($"Erreur lors de la mise à jour du client : {ex.Message}");
+                return false;
+            }
+        }
+
+
+
     }
 }
 

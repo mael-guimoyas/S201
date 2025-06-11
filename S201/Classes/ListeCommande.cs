@@ -9,6 +9,7 @@ namespace S201
     {
         private string numCommande;
         private ObservableCollection<Commandes> lesCommandes;
+        private ObservableCollection<Commandes> lesPlats;
 
 
 
