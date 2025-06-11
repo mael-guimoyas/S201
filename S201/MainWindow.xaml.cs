@@ -22,7 +22,7 @@ namespace S201
             Conteneur.Content = new Accueuil();
         }
 
-        private void ButCom_Click(object sender, RoutedEventArgs e)
+        private void ButComm_Click(object sender, RoutedEventArgs e)
         {
             Conteneur.Content = new voirCommandes();
         }
