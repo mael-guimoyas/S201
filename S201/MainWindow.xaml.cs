@@ -85,11 +85,16 @@ namespace S201
             ButClients.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
         }
 
-        private void ButCom_Click(object sender, RoutedEventArgs e)
+        private void ButComm_Click(object sender, RoutedEventArgs e)
         {
             Commandes uneCommande = new Commandes();
-
             Conteneur.Content = new voirCommandes(uneCommande);
+            ButComm.Background = new SolidColorBrush(Color.FromRgb(25, 118, 210));
+            ButComm.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            ButAccueil.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            ButAccueil.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            ButClients.Background = new SolidColorBrush(Color.FromRgb(25, 115, 210));
+            ButClients.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
         }
     }
 }
