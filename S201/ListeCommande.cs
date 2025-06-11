@@ -9,22 +9,19 @@ namespace S201
     {
         private string numCommande;
         private ObservableCollection<Commandes> lesCommandes;
-        private ObservableCollection<Client> lesClients;
 
-        public string NumCommande { get => numCommande; set => numCommande = value; }
-        public ObservableCollection<Commandes> LesCommandes { get => lesCommandes; set => lesCommandes = value; }
-        public ObservableCollection<Client> LesClients { get => lesClients; set => lesClients = value; }
+
 
         public ListeCommande(string numCommande)
         {
             this.NumCommande = numCommande;
             this.LesCommandes = new ObservableCollection<Commandes>(new Commandes().FindAll());
-            this.LesClients = new ObservableCollection<Client>(new Client().FindAll());
         }
 
         public ListeCommande() : this("") { }
 
-       
+        public string NumCommande { get => numCommande; set => numCommande = value; }
+        public ObservableCollection<Commandes> LesCommandes { get => lesCommandes; set => lesCommandes = value; }
 
         // Ajoute une commande à la liste
         public bool AjouterCommande(Commandes commande)

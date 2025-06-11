@@ -28,7 +28,6 @@ namespace S201
             Conteneur.Content = new Accueuil();
         }
 
-        private void ButCom_Click(object sender, RoutedEventArgs e)
         public void ChargeData()
         {
             try
@@ -44,9 +43,24 @@ namespace S201
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public void ChargeBd()
         {
-            Conteneur.Content = new voirCommandes();
+            Commandes uneCommande = new Commandes();
+            MainWindow wMain = new MainWindow();
+            bool? result = wMain.ShowDialog();
+            if (result == true)
+            {
+                try
+                {
+                    uneCommande.NumCommande = uneCommande.Create();
+                    LesCommandes.LesCommandes.Add(uneCommande);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(this, "Le chien n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+
         }
 
         private void ButAccueil_Click(object sender, RoutedEventArgs e)
@@ -57,6 +71,13 @@ namespace S201
         private void ButClients_Click(object sender, RoutedEventArgs e)
         {
             Conteneur.Content = new GererClients();
+        }
+
+        private void ButCom_Click(object sender, RoutedEventArgs e)
+        {
+            Commandes uneCommande = new Commandes();
+
+            Conteneur.Content = new voirCommandes(uneCommande);
         }
     }
 }

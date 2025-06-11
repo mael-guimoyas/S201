@@ -89,23 +89,23 @@
         <!--  4. Zone de recherche + tableau  -->
         <StackPanel>
             <!--  Barre de recherche  -->
-            <TextBox
+            <TextBox x:Name="rechercheClient"
                 Width="200"
                 Margin="0,0,0,10"
                 HorizontalAlignment="Right"
-                Text="Rechercher un client..." />
+                Text="Rechercher un client..." TextChanged="rechercheClient_TextChanged" />
 
             <!--  Tableau des commandes  -->
-            <DataGrid
+            <DataGrid x:Name="dgCommande"
                 AutoGenerateColumns="False"
                 IsReadOnly="True"
                 ItemsSource="{Binding LesCommandes}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding NumCommande}" Header="N° Commande" />
-                    <DataGridTextColumn Binding="{Binding DateCommande}" Header="Heure" />
-                    <DataGridTextColumn Binding="{Binding PrixTotal}" Header="Montant" />
-                    <DataGridTextColumn Binding="{Binding EstPaye}" Header="Statut" />
-                    <DataGridTextColumn Binding="{Binding EstRetire}" Header="" />
+                    <DataGridTextColumn Binding="{Binding NumCommande}" Header="N° Commande" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding DateCommande}" Header="Heure" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding PrixTotal}" Header="Montant" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding EstPaye}" Header="Statut" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding EstRetire}" Header="" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
