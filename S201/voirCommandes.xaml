@@ -89,23 +89,52 @@
         <!--  4. Zone de recherche + tableau  -->
         <StackPanel>
             <!--  Barre de recherche  -->
-            <TextBox x:Name="rechercheClient"
+            <TextBox
+                x:Name="rechercheClient"
                 Width="200"
                 Margin="0,0,0,10"
                 HorizontalAlignment="Right"
-                Text="Rechercher un client..." TextChanged="rechercheClient_TextChanged" />
+                Text="Rechercher un client..."
+                TextChanged="rechercheClient_TextChanged" />
 
             <!--  Tableau des commandes  -->
-            <DataGrid x:Name="dgCommande"
+            <DataGrid
+                x:Name="dgCommande"
                 AutoGenerateColumns="False"
                 IsReadOnly="True"
                 ItemsSource="{Binding LesCommandes}">
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="#F5F5F5" />
+                        <Setter Property="Foreground" Value="#333" />
+                        <Setter Property="FontWeight" Value="SemiBold" />
+                        <Setter Property="Padding" Value="12,8" />
+                        <Setter Property="BorderBrush" Value="#E0E0E0" />
+                        <Setter Property="BorderThickness" Value="0,0,1,1" />
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding NumCommande}" Header="N° Commande" Width="*"/>
-                    <DataGridTextColumn Binding="{Binding DateCommande}" Header="Heure" Width="*"/>
-                    <DataGridTextColumn Binding="{Binding PrixTotal}" Header="Montant" Width="*"/>
-                    <DataGridTextColumn Binding="{Binding EstPaye}" Header="Statut" Width="*"/>
-                    <DataGridTextColumn Binding="{Binding EstRetire}" Header="" Width="*"/>
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding NumCommande}"
+                        Header="N° Commande" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding DateCommande}"
+                        Header="Heure" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding PrixTotal}"
+                        Header="Montant" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding EstPaye}"
+                        Header="Statut" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding EstRetire}"
+                        Header="" />
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
