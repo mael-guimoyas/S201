@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -14,25 +15,51 @@ namespace S201
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+    /// 
     public partial class MainWindow : Window
     {
-        
+        public ListeCommande LesCommandes { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
-
+            ChargeData();
             Conteneur.Content = new Accueuil();
         }
 
-        private void ButComm_Click(object sender, RoutedEventArgs e)
+        public void ChargeData()
         {
-            Conteneur.Content = new voirCommandes();
-            ButComm.Background = new SolidColorBrush(Color.FromRgb(25, 118, 210));
-            ButComm.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-            ButAccueil.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-            ButAccueil.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
-            ButClients.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-            ButClients.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            try
+            {
+                LesCommandes = new ListeCommande("liste principale");
+                this.DataContext = LesCommandes;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur : " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                Application.Current.Shutdown();
+            }
+        }
+
+        public void ChargeBd()
+        {
+            Commandes uneCommande = new Commandes();
+            MainWindow wMain = new MainWindow();
+            bool? result = wMain.ShowDialog();
+            if (result == true)
+            {
+                try
+                {
+                    uneCommande.NumCommande = uneCommande.Create();
+                    LesCommandes.LesCommandes.Add(uneCommande);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(this, "Le chien n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
 
         }
 
@@ -56,6 +83,18 @@ namespace S201
             ButAccueil.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
             ButClients.Background = new SolidColorBrush(Color.FromRgb(25, 115, 210));
             ButClients.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+        }
+
+        private void ButComm_Click(object sender, RoutedEventArgs e)
+        {
+            Commandes uneCommande = new Commandes();
+            Conteneur.Content = new voirCommandes(uneCommande);
+            ButComm.Background = new SolidColorBrush(Color.FromRgb(25, 118, 210));
+            ButComm.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            ButAccueil.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            ButAccueil.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            ButClients.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            ButClients.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
         }
     }
 }

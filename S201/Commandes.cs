@@ -91,8 +91,7 @@ namespace S201
         {
             int nb = 0;
             using (var cmdInsert = new NpgsqlCommand(
-                "INSERT INTO commande (numclient, numemploye, datecommande, dateretraitprevue, payee, retiree, prixtotal) " +
-                "VALUES (@numclient, @numemploye, @datecommande, @dateretraitprevue, @estpaye, @estretire, @prixtotal) RETURNING numcommande"))
+                "INSERT INTO commande (numclient, numemploye, datecommande, dateretraitprevue, payee, retiree, prixtotal) VALUES (@numclient, @numemploye, @datecommande, @dateretraitprevue, @estpaye, @estretire, @prixtotal) RETURNING numcommande"))
             {
                 cmdInsert.Parameters.AddWithValue("numclient", this.NumClient);
                 cmdInsert.Parameters.AddWithValue("numemploye", this.NumEmploye);
@@ -147,11 +146,12 @@ namespace S201
         public List<Commandes> FindAll()
         {
             List<Commandes> lesCommandes = new List<Commandes>();
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from commande;"))
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from commande ;"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
                 {
+                    Console.WriteLine($"Ligne : {dr["numcommande"]}, {dr["numclient"]}, {dr["numemploye"]}");
                     lesCommandes.Add(new Commandes(
                         (int)dr["numcommande"],
                         (int)dr["numclient"],
@@ -163,8 +163,8 @@ namespace S201
                         (double)dr["prixtotal"]
                     ));
                 }
+                return lesCommandes;
             }
-            return lesCommandes;
         }
 
         public List<Commandes> FindBySelection(string criteres)
