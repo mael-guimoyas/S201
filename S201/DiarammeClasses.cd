@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="S201.Client">
+    <Position X="1.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQAAgIAAAAAiAAAAIgQAIAAAACAAEAAAkABAAIAAQI=</HashCode>
+      <FileName>Model\Client.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="S201.Commandes" BaseTypeListCollapsed="true">
+    <Position X="5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACBAAAKAQAEiAEYCAAgCAEDAMAAgQEAAAAAAiA=</HashCode>
+      <FileName>Model\Commandes.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="S201.DataAccess">
+    <Position X="6.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAgAAAABIBAAAABAABAAQAgAABAAAAA=</HashCode>
+      <FileName>Model\DataAccess.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="S201.ListeCommande">
+    <Position X="3.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAABAAwAAAAAAAAAIQAAAAAACAAEAAEACQAAAAA=</HashCode>
+      <FileName>Model\ListeCommande.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="S201.Plat">
+    <Position X="8.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUQAAAAAQgAIAEFgAAQCIIgAAECAMAAAAAACIAgEiA=</HashCode>
+      <FileName>Model\Plat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="S201.ICrud&lt;T&gt;">
+    <Position X="3.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAQAAAgAAEAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\ICrud.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
