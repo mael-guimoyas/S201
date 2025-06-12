@@ -25,9 +25,9 @@
             <Label
                 Grid.Column="0"
                 VerticalAlignment="Center"
-                Content="Gestion des clients"
+                Content="Clients"
                 FontSize="24"
-                FontWeight="Bold" />
+                FontWeight="Bold" Margin="0,0,27,0" />
 
             <StackPanel
                 Grid.Column="1"
@@ -35,9 +35,9 @@
                 Orientation="Horizontal">
                 <TextBox
                     x:Name="txtRecherche"
-                    Width="250"
-                    Height="35"
-                    Margin="0,0,10,0"
+                    Width="186"
+                    Height="42"
+                    Margin="0,0,15,0"
                     Padding="10,8"
                     VerticalContentAlignment="Center"
                     BorderBrush="#E0E0E0"
@@ -158,6 +158,8 @@
                         Binding="{Binding Adresseville}"
                         Header="Ville" />
 
+
+
                     <DataGridTemplateColumn Width="100" Header="Statut">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -227,6 +229,7 @@
 
                 <!--  Les données seront liées depuis le code-behind  -->
             </DataGrid>
+
         </Border>
 
         <!--  Footer avec compteur  -->
@@ -238,5 +241,12 @@
                 Foreground="#666"
                 Text="0 clients trouvés" />
         </Grid>
+        <TextBlock
+            x:Name="txtStatus"
+            Grid.Row="2"
+            Margin="10"
+            FontWeight="Bold"
+            Text="Prêt" />
+
     </Grid>
 </UserControl>

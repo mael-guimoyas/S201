@@ -53,28 +53,28 @@ namespace S201
             }
             return lesChiens;
         }
-        public Client FindById(int id)
+        public List<Client> FindByNom(string nom)
         {
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("SELECT * FROM client WHERE numclient = @id"))
+            List<Client> lesClients = new List<Client>();
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("SELECT * FROM client WHERE LOWER(nomclient) LIKE LOWER(@nom)"))
             {
-                cmdSelect.Parameters.AddWithValue("@id", id);
+                cmdSelect.Parameters.AddWithValue("@nom", "%" + nom + "%");
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
 
-                if (dt.Rows.Count > 0)
+                foreach (DataRow dr in dt.Rows)
                 {
-                    DataRow dr = dt.Rows[0];
-                    return new Client(
-                        (int)dr["numclient"],
+                    lesClients.Add(new Client(
+                        (Int32)dr["numclient"],
                         (String)dr["nomclient"],
                         (String)dr["prenomclient"],
                         (String)dr["tel"],
                         (String)dr["adresserue"],
                         (String)dr["adressecp"],
                         (String)dr["adresseville"]
-                    );
+                    ));
                 }
-                return null; // Client non trouvé
             }
+            return lesClients;
         }
         public bool Create()
         {
