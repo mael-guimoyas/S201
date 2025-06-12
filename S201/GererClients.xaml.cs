@@ -47,45 +47,8 @@ namespace S201
             }
         }
 
-        private void btnRechercher_Click(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtRecherche.Text))
-            {
-                MessageBox.Show("Veuillez saisir un ID de client.", "Attention",
-                    MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-
-            if (!int.TryParse(txtRecherche.Text, out int idClient))
-            {
-                MessageBox.Show("L'ID doit être un nombre entier.", "Erreur de saisie",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            try
-            {
-                Client clientTrouve = new Client().FindById(idClient);
-                if (clientTrouve != null)
-                {
-                    lesClients.Clear();
-                    lesClients.Add(clientTrouve);
-                    MessageBox.Show($"Client trouvé : {clientTrouve.Nomclient} {clientTrouve.Prenomclient}",
-                        "Recherche réussie", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Aucun client trouvé avec cet ID.", "Recherche",
-                        MessageBoxButton.OK, MessageBoxImage.Information);
-                    lesClients.Clear();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erreur lors de la recherche : " + ex.Message, "Erreur",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
+       
+        
 
         // Nouvelle méthode pour gérer le clic sur "Ajouter un client"
         private void btnAjouterClient_Click(object sender, RoutedEventArgs e)
@@ -167,9 +130,60 @@ namespace S201
                 MessageBox.Show("Veuillez sélectionner un client à modifier.", "Aucune sélection",
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }
+
+
         }
+        private bool IsValidName(string name)
+        {
+            // Vérifier si le nom ne contient pas de caractères spéciaux ou des chiffres
+            return name.All(c => char.IsLetter(c) || char.IsWhiteSpace(c));
+        }
+
+        private void btnRechercher_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtRecherche.Text))
+            {
+                MessageBox.Show("Veuillez saisir un nom de client.", "Attention",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            try
+            {
+                List<Client> clientsTrouves = new Client().FindByNom(txtRecherche.Text.Trim());
+
+                lesClients.Clear();
+
+                if (clientsTrouves.Count > 0)
+                {
+                    foreach (Client client in clientsTrouves)
+                    {
+                        lesClients.Add(client);
+                    }
+
+                    txtStatus.Text = $"{clientsTrouves.Count} client(s) trouvé(s) avec le nom '{txtRecherche.Text}'";
+
+                    MessageBox.Show($"{clientsTrouves.Count} client(s) trouvé(s).", "Recherche réussie",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    txtStatus.Text = $"Aucun client trouvé avec le nom '{txtRecherche.Text}'";
+                    MessageBox.Show("Aucun client trouvé avec ce nom.", "Recherche",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur lors de la recherche : " + ex.Message, "Erreur",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        
     }
-}
+    }
+
 
 
     
