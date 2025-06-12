@@ -8,6 +8,7 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    
     <Grid x:Name="grdprincipale" Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="60" />
@@ -35,6 +36,7 @@
                 Orientation="Horizontal">
                 <TextBox
                     x:Name="txtRecherche"
+                    TextChanged="txtRecherche_TextChanged"
                     Width="186"
                     Height="42"
                     Margin="0,0,15,0"
@@ -45,17 +47,6 @@
                     FontSize="14"
                     Foreground="Gray"
                     Text="" />
-                <Button
-                    x:Name="btnRechercher"
-                    Height="35"
-                    Margin="0,0,10,0"
-                    Padding="20,8"
-                    Background="#2196F3"
-                    BorderThickness="0"
-                    Click="btnRechercher_Click"
-                    Content="Rechercher"
-                    FontSize="14"
-                    Foreground="White" />
                 <Button
                     x:Name="btnAfficherTout"
                     Height="35"
@@ -249,4 +240,5 @@
             Text="Prêt" />
 
     </Grid>
+    
 </UserControl>

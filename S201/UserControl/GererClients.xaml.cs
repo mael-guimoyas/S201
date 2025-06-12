@@ -40,6 +40,8 @@ namespace S201
             {
                 lesClients = new ObservableCollection<Client>(new Client().FindAll());
                 dgClients.ItemsSource = lesClients;
+
+                
             }
             catch (Exception ex)
             {
@@ -47,8 +49,51 @@ namespace S201
             }
         }
 
-       
-        
+        private void UpdateStatus()
+        {
+            var view = CollectionViewSource.GetDefaultView(dgClients.ItemsSource);
+            if (view != null)
+            {
+                int totalClients = lesClients.Count;
+                int clientsAffiches = view.Cast<object>().Count();
+
+                if (string.IsNullOrWhiteSpace(txtRecherche.Text))
+                {
+                    txtStatus.Text = $"{clientsAffiches} client(s) affiché(s)";
+                }
+                else
+                {
+                    txtStatus.Text = $"{clientsAffiches} client(s) trouvé(s) pour '{txtRecherche.Text}' sur {totalClients} total";
+                }
+            }
+        }
+
+        // Méthode de filtrage pour la recherche par nom/prénom
+        private bool RechercheClient(object obj)
+        {
+            if (string.IsNullOrWhiteSpace(txtRecherche.Text))
+                return true;
+
+            if (obj is Client unClient)
+            {
+                // Recherche insensible à la casse : le nom ou prénom doit commencer par le texte saisi
+                return unClient.Nomclient.StartsWith(txtRecherche.Text, StringComparison.OrdinalIgnoreCase) ||
+                       unClient.Prenomclient.StartsWith(txtRecherche.Text, StringComparison.OrdinalIgnoreCase);
+            }
+            return false;
+        }
+
+        // Événement TextChanged pour la recherche en temps réel
+        private void txtRecherche_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var view = CollectionViewSource.GetDefaultView(dgClients.ItemsSource);
+            if (view != null)
+            {
+                view.Filter = RechercheClient;
+                view.Refresh();
+                UpdateStatus();
+            }
+        }
 
         // Nouvelle méthode pour gérer le clic sur "Ajouter un client"
         private void btnAjouterClient_Click(object sender, RoutedEventArgs e)
@@ -58,17 +103,11 @@ namespace S201
 
         private void AfficherCreationClient()
         {
-            // Cacher la grille de gestion des clients
             dgClients.Visibility = Visibility.Collapsed;
-
-            // Créer et afficher le contrôle de création de client
             if (creerClientControl == null)
             {
                 creerClientControl = new CreerClient();
                 creerClientControl.ClientCree += CreerClientControl_ClientCree;
-
-                // Ajouter le contrôle à la grille principale
-                // Supposons que votre grille principale s'appelle grdPrincipal
                 grdprincipale.Children.Add(creerClientControl);
                 Grid.SetRow(creerClientControl, 0);
                 Grid.SetColumnSpan(creerClientControl, 2);
@@ -79,13 +118,10 @@ namespace S201
 
         private void CreerClientControl_ClientCree(object sender, ClientCreeEventArgs e)
         {
-            // Cacher le contrôle de création
             creerClientControl.Visibility = Visibility.Collapsed;
-
-            // Réafficher la grille de gestion des clients
             dgClients.Visibility = Visibility.Visible;
 
-            // Si un client a été créé (pas annulé), actualiser la liste
+            // Si client cree
             if (!e.Annule && e.Client != null)
             {
                 ChargerTousLesClients(); // Recharger tous les clients
@@ -94,15 +130,18 @@ namespace S201
             }
         }
 
-        // Méthode pour afficher tous les clients (bouton "Afficher tout")
+        // Afficher tout client
         private void btnAfficherTout_Click(object sender, RoutedEventArgs e)
         {
-            ChargerTousLesClients();
-            txtRecherche.Text = ""; 
+            txtRecherche.Text = "";
+            var view = CollectionViewSource.GetDefaultView(dgClients.ItemsSource);
+            if (view != null)
+            {
+                view.Filter = null;
+                view.Refresh();
+               
+            }
         }
-
-        
-       
 
         private void btnAjouter_Click(object sender, RoutedEventArgs e)
         {
@@ -130,60 +169,17 @@ namespace S201
                 MessageBox.Show("Veuillez sélectionner un client à modifier.", "Aucune sélection",
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }
-
-
-        }
-        private bool IsValidName(string name)
-        {
-            // Vérifier si le nom ne contient pas de caractères spéciaux ou des chiffres
-            return name.All(c => char.IsLetter(c) || char.IsWhiteSpace(c));
-        }
-
-        private void btnRechercher_Click(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtRecherche.Text))
-            {
-                MessageBox.Show("Veuillez saisir un nom de client.", "Attention",
-                    MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-
-            try
-            {
-                List<Client> clientsTrouves = new Client().FindByNom(txtRecherche.Text.Trim());
-
-                lesClients.Clear();
-
-                if (clientsTrouves.Count > 0)
-                {
-                    foreach (Client client in clientsTrouves)
-                    {
-                        lesClients.Add(client);
-                    }
-
-                    txtStatus.Text = $"{clientsTrouves.Count} client(s) trouvé(s) avec le nom '{txtRecherche.Text}'";
-
-                    MessageBox.Show($"{clientsTrouves.Count} client(s) trouvé(s).", "Recherche réussie",
-                        MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                else
-                {
-                    txtStatus.Text = $"Aucun client trouvé avec le nom '{txtRecherche.Text}'";
-                    MessageBox.Show("Aucun client trouvé avec ce nom.", "Recherche",
-                        MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erreur lors de la recherche : " + ex.Message, "Erreur",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-            }
         }
 
         
+
+       
     }
-    }
+}
 
 
 
-    
+
+
+
+
