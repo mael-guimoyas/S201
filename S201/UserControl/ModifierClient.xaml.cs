@@ -75,12 +75,14 @@ namespace S201
                     MessageBox.Show("Erreur lors de la modification du client.", "Erreur",
                         MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+                this.DialogResult = true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Erreur lors de la modification : {ex.Message}", "Erreur",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            
         }
 
         private void btnAnnuler_Click(object sender, RoutedEventArgs e)

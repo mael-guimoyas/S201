@@ -41,11 +41,11 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel>
                         <Label Content="Catégorie*" />
-                        <ListBox x:Name="ListBoxCatégorie" Height="20" />
+                        <TextBox x:Name="TxtBoxCatégorie" Height="20" />
                     </StackPanel>
                     <StackPanel Grid.Column="2">
                         <Label Content="Type*" />
-                        <ListBox x:Name="ListBoxType" Height="20" />
+                        <TextBox x:Name="TxtBoxType" Height="20" />
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="3">
@@ -57,10 +57,6 @@
                     <StackPanel>
                         <Label Content="Prix (€)*" />
                         <TextBox x:Name="TxtBoxPrix" />
-                    </StackPanel>
-                    <StackPanel Grid.Column="2">
-                        <Label Content="Temps de préparation (min)" />
-                        <TextBox x:Name="TxtBoxTempsDePrépa" />
                     </StackPanel>
                 </Grid>
                 <StackPanel Grid.Row="4">
