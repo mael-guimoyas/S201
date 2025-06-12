@@ -93,6 +93,19 @@ namespace S201
 
             return false;
         }
+        private bool RechercheParPrix(object obj)
+        {
+            if (string.IsNullOrWhiteSpace(txtBoxPrix.Text))
+                return true;
+
+            if (obj is Plat unPlat)
+            {
+                return unPlat.PrixUnitaire.ToString()
+                    .StartsWith(txtBoxPrix.Text, StringComparison.OrdinalIgnoreCase);
+            }
+
+            return false;
+        }
 
         private void TxtNom_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -109,7 +122,7 @@ namespace S201
         private void TxtPrix_TextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(dgPlat.ItemsSource).Refresh();
-            dgPlat.Items.Filter = RechercheParCat;//aa
+            dgPlat.Items.Filter = RechercheParPrix;
         }
 
         private void txtBoxCate_TextChanged(object sender, TextChangedEventArgs e)
