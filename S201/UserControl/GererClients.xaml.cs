@@ -49,7 +49,7 @@ namespace S201
             }
         }
 
-        private void UpdateStatus()
+        private void MajStatus()
         {
             var view = CollectionViewSource.GetDefaultView(dgClients.ItemsSource);
             if (view != null)
@@ -68,7 +68,7 @@ namespace S201
             }
         }
 
-        // Méthode de filtrage pour la recherche par nom/prénom
+        // Recherche par nom prenom
         private bool RechercheClient(object obj)
         {
             if (string.IsNullOrWhiteSpace(txtRecherche.Text))
@@ -76,14 +76,13 @@ namespace S201
 
             if (obj is Client unClient)
             {
-                // Recherche insensible à la casse : le nom ou prénom doit commencer par le texte saisi
+                
                 return unClient.Nomclient.StartsWith(txtRecherche.Text, StringComparison.OrdinalIgnoreCase) ||
                        unClient.Prenomclient.StartsWith(txtRecherche.Text, StringComparison.OrdinalIgnoreCase);
             }
             return false;
         }
 
-        // Événement TextChanged pour la recherche en temps réel
         private void txtRecherche_TextChanged(object sender, TextChangedEventArgs e)
         {
             var view = CollectionViewSource.GetDefaultView(dgClients.ItemsSource);
@@ -91,11 +90,11 @@ namespace S201
             {
                 view.Filter = RechercheClient;
                 view.Refresh();
-                UpdateStatus();
+                MajStatus();
             }
         }
 
-        // Nouvelle méthode pour gérer le clic sur "Ajouter un client"
+        //Ajouter client
         private void btnAjouterClient_Click(object sender, RoutedEventArgs e)
         {
             AfficherCreationClient();
@@ -120,11 +119,9 @@ namespace S201
         {
             creerClientControl.Visibility = Visibility.Collapsed;
             dgClients.Visibility = Visibility.Visible;
-
-            // Si client cree
             if (!e.Annule && e.Client != null)
             {
-                ChargerTousLesClients(); // Recharger tous les clients
+                ChargerTousLesClients(); 
                 MessageBox.Show($"Le client {e.Client.Nomclient} {e.Client.Prenomclient} a été ajouté avec succès !",
                     "Client ajouté", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -151,14 +148,12 @@ namespace S201
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // Récupérer le client sélectionné dans le DataGrid
             if (dgClients.SelectedItem is Client clientSelectionne)
             {
                 ModifierClient modifierclient = new ModifierClient(clientSelectionne);
                 modifierclient.ClientModifie += (s, args) => {
                     if (!args.Annule)
                     {
-                        // Actualiser la liste après modification
                         ChargerTousLesClients();
                     }
                 };
