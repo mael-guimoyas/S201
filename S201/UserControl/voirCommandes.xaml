@@ -79,17 +79,21 @@
         <!--  4. Zone de recherche + tableau  -->
         <StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Label Content="Recherche par date : "/>
+                <Label Content="Recherche par date : " Margin="10"/>
                 <TextBox
                     x:Name="rechercheJour"
                     Width="132"
-                    Text="" TextChanged="rechercheJour_TextChanged"/>
-                <Label Content="Recherche par numclient : "/>
+                    Text="" TextChanged="rechercheJour_TextChanged"
+                    Margin="10"/>
+                <Label Content="Recherche par numclient : "
+                       Margin="10"/>
                 <TextBox
                     x:Name="rechercheClient"
                     Width="134"
                     Text=""
-                    TextChanged="rechercheClient_TextChanged" RenderTransformOrigin="0.491,0.621" />
+                    TextChanged="rechercheClient_TextChanged" RenderTransformOrigin="0.491,0.621" 
+                    Margin="10"/>
+                <Button x:Name="butCommande" Content="Creer une commande" Margin="10" Background="#FF0082E6" Padding="5" Click="butCommande_Click" HorizontalAlignment="Right" />
             </StackPanel>
 
 
@@ -152,6 +156,35 @@
                         Width="*"
                         Binding="{Binding NumClient}"
                         Header="Numero client" />
+
+
+                    <DataGridTemplateColumn Width="180" Header="Actions">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <Button
+                                        Margin="0,0,15,0"
+                                        Padding="8,4"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Content="Modifier"
+                                        Cursor="Hand"
+                                        FontSize="12"
+                                        Foreground="#2196F3" Click="Button_Click">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#E3F2FD" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

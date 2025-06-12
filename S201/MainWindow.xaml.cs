@@ -23,12 +23,21 @@ namespace S201
         
         public ListeCommande LesCommandes { get; set; }
 
+        public UserControl Conteneur
+        {
+            get => conteneurUC.Content as UserControl;
+            set => conteneurUC.Content = value;
+        }
+
+
         public MainWindow()
         {
             InitializeComponent();
             ChargeData();
-            Conteneur.Content = new Accueuil();
+            conteneurUC.Content = new Accueuil();
         }
+
+       
 
         public void ChargeData()
         {

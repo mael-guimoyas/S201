@@ -156,8 +156,43 @@ namespace S201
             }
         }
 
+        public static Client FindById(int numclient)
+        {
+            using (NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM client WHERE numclient = @numclient"))
+            {
+                cmd.Parameters.AddWithValue("@numclient", numclient);
+                DataTable dt = DataAccess.Instance.ExecuteSelect(cmd);
+                if (dt.Rows.Count == 1)
+                {
+                    DataRow dr = dt.Rows[0];
+                    return new Client(
+                        (int)dr["numclient"],
+                        (string)dr["nomclient"],
+                        (string)dr["prenomclient"],
+                        (string)dr["tel"],
+                        (string)dr["adresserue"],
+                        (string)dr["adressecp"],
+                        (string)dr["adresseville"]
+                    );
+                }
+            }
+            return null;
+        }
 
+        public override bool Equals(object? obj)
+        {
+            return base.Equals(obj);
+        }
 
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string? ToString()
+        {
+            return base.ToString();
+        }
     }
 }
 
