@@ -1,4 +1,5 @@
-﻿using System;
+﻿using S201;
+using System;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,6 +20,7 @@ namespace S201
     /// 
     public partial class MainWindow : Window
     {
+        
         public ListeCommande LesCommandes { get; set; }
 
         public MainWindow()
@@ -57,7 +59,7 @@ namespace S201
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(this, "Le chien n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(this, "L n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
 
