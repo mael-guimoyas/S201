@@ -1,5 +1,7 @@
-﻿using System;
+﻿using S201.Classes;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +22,8 @@ namespace S201
     /// </summary>
     public partial class voirCommandes : UserControl
     {
+        private Commandes commandeAModifier;
+
         public ListeCommande LesCommandes { get; set; }
 
         public voirCommandes()
@@ -85,5 +89,32 @@ namespace S201
             CollectionViewSource.GetDefaultView(dgCommande.ItemsSource).Refresh();
             dgCommande.Items.Filter = RechercheDate;
         }
+
+        private void butCommande_Click(object sender, RoutedEventArgs e)
+        {
+            Client unClient = new Client();
+            Commandes uneCommande = new Commandes();
+            CreerCommande creerCommande = new CreerCommande(unClient, uneCommande);
+            MainWindow wPrincipale = (MainWindow)Application.Current.MainWindow;
+            wPrincipale.Conteneur = creerCommande; 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Commandes commande = (Commandes)((FrameworkElement)sender).DataContext;
+
+            Client client = Client.FindById(commande.NumClient);
+
+            List<PlatCommande> plats = PlatCommande.FindByCommande(commande.NumCommande);
+
+            CreerCommande creerCommande = new CreerCommande(client, commande);
+
+            MainWindow wPrincipale = (MainWindow)Application.Current.MainWindow;
+            wPrincipale.Conteneur = creerCommande;
+        }
+
+
+
+
     }
 }
