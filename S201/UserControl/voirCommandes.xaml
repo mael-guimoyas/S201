@@ -88,14 +88,18 @@
 
         <!--  4. Zone de recherche + tableau  -->
         <StackPanel>
-            <!--  Barre de recherche  -->
-            <TextBox
-                x:Name="rechercheClient"
-                Width="200"
-                Margin="0,0,0,10"
-                HorizontalAlignment="Right"
-                Text="Rechercher un client..."
-                TextChanged="rechercheClient_TextChanged" />
+            <StackPanel Orientation="Horizontal">
+                <TextBox
+                    x:Name="rechercheJour"
+                    Width="134"
+                    Text="" Margin="134,0,0,0"/>
+                <TextBox
+                    x:Name="rechercheClient"
+                    Width="134"
+                    Text=""
+                    TextChanged="rechercheClient_TextChanged" RenderTransformOrigin="0.491,0.621" Margin="398,0,0,0" />
+            </StackPanel>
+
 
             <!--  Tableau des commandes  -->
             <DataGrid
@@ -122,7 +126,7 @@
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding DateCommande}"
-                        Header="Heure" />
+                        Header="Date/heure" />
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding PrixTotal}"
@@ -130,11 +134,15 @@
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding EstPaye}"
-                        Header="Statut" />
+                        Header="Commande paye" />
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding EstRetire}"
-                        Header="" />
+                        Header="Commande retire" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding NumClient}"
+                        Header="Numero client" />
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
