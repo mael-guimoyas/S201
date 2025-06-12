@@ -96,7 +96,9 @@ namespace S201
             Commandes uneCommande = new Commandes();
             CreerCommande creerCommande = new CreerCommande(unClient, uneCommande);
             MainWindow wPrincipale = (MainWindow)Application.Current.MainWindow;
-            wPrincipale.Conteneur = creerCommande; 
+            wPrincipale.Conteneur = creerCommande;
+            creerCommande.typeCommande.Text = "Creation de commande";
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -111,6 +113,9 @@ namespace S201
 
             MainWindow wPrincipale = (MainWindow)Application.Current.MainWindow;
             wPrincipale.Conteneur = creerCommande;
+
+            creerCommande.typeCommande.Text = "Modification de commande";
+
         }
 
 

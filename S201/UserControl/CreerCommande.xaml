@@ -14,9 +14,17 @@
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
 
+        <StackPanel>
+            <TextBlock x:Name="typeCommande"
+            Margin="0,0,0,10"
+            FontSize="16"
+            FontWeight="Bold"
+            Text=""/>   
+        </StackPanel>
+
         <StackPanel Grid.Column="0" Margin="0,0,20,0">
             <Border
-                Margin="0,0,0,20"
+                Margin="0,44,0,20"
                 Padding="10"
                 BorderBrush="#CCCCCC"
                 BorderThickness="1"

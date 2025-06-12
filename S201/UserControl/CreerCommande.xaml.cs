@@ -26,7 +26,7 @@ namespace S201
     public partial class CreerCommande : UserControl
     {
         private Commandes commandeEnCours;
-        public ObservableCollection<PlatCommande> platsDeCommande = new ObservableCollection<PlatCommande>();
+        public ObservableCollection<PlatCommande> PlatsDeCommande { get; set; }
 
         public CreerCommande(Client unClient, Commandes uneCommande)
         {
@@ -35,9 +35,9 @@ namespace S201
             List<Client> clients = new List<Client> { unClient };
             listeClient.ItemsSource = clients;
             listeClient.SelectedItem = unClient;
-            this.DataContext = this;
             List<PlatCommande> plats = PlatCommande.FindByCommande(commandeEnCours.NumCommande);
-            platsDeCommande = new ObservableCollection<PlatCommande>(plats);
+            this.DataContext = this;
+
         }
 
         private void ajoutClient_TextChanged(object sender, TextChangedEventArgs e)
@@ -113,8 +113,5 @@ namespace S201
                 this.DataContext = clientSelectionne;
             }
         }
-
-
-
     }
 }
