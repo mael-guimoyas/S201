@@ -27,7 +27,7 @@ namespace S201
 
         private void ButPlat_Click(object sender, RoutedEventArgs e)
         {
-            Conteneur.Content = new RecherchePlats();
+            Conteneur.Content = new CreerPlat();
         }
     }
 }

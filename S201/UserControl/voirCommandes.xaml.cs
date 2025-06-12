@@ -112,9 +112,5 @@ namespace S201
             MainWindow wPrincipale = (MainWindow)Application.Current.MainWindow;
             wPrincipale.Conteneur = creerCommande;
         }
-
-
-
-
     }
 }
