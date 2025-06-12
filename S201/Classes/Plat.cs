@@ -83,7 +83,7 @@ namespace S201
         public int Create()
         {
             int nb = 0;
-            using (var cmdInsert = new NpgsqlCommand("insert into Plat (NumSousCategorie,NumPeriode,NomPlat,PrixUnitaire,DelaiPréparation,NbPersonnes ) values (@NumSousCategorie,@NumPeriode,@NomPlat,@PrixUnitaire,@DelaiPréparation,@NbPersonnes) RETURNING idPlat"))
+            using (var cmdInsert = new NpgsqlCommand("insert into Plat (NumSousCategorie,NumPeriode,NomPlat,PrixUnitaire,DelaiPreparation,NbPersonnes ) values (@NumSousCategorie,@NumPeriode,@NomPlat,@PrixUnitaire,@DelaiPreparation,@NbPersonnes) RETURNING idPlat"))
             {
                 cmdInsert.Parameters.AddWithValue("NumSousCategorie", this.numSousCatégorie);
                 cmdInsert.Parameters.AddWithValue("NumPeriode", this.numPeriode);
@@ -104,11 +104,11 @@ namespace S201
                 cmdSelect.Parameters.AddWithValue("numPlat", this.NumPlat);
 
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
-                this.numSousCatégorie = (int)dt.Rows[0]["numSousCatégorie"];
+                this.numSousCatégorie = (int)dt.Rows[0]["numSousCategorie"];
                 this.numPeriode = (int)dt.Rows[0]["numPeriode"];
                 this.nomPlat = (string)dt.Rows[0]["nomPlat"];
                 this.PrixUnitaire = (double)dt.Rows[0]["prixUnitaire"];
-                this.delaiPréparation = (int)dt.Rows[0]["delaiPréparation"];
+                this.delaiPréparation = (int)dt.Rows[0]["delaiPreparation"];
                 this.nbPersonnes = (int)dt.Rows[0]["nbPersonnes"];
 
             }
@@ -118,8 +118,8 @@ namespace S201
         public int Update()
         {
             using (var cmdUpdate = new NpgsqlCommand(
-                "UPDATE commande SET numSousCatégorie = @numSousCatégorie, numPeriode = @numPeriode, " +
-                "nomPlat = @nomPlat, prixUnitaire = @prixUnitaire, delaiPréparation = @delaiPréparation, " +
+                "UPDATE commande SET numSousCategorie = @numSousCategorie, numPeriode = @numPeriode, " +
+                "nomPlat = @nomPlat, prixUnitaire = @prixUnitaire, delaiPreparation = @delaiPreparation, " +
                 "nbPersonnes = @nbPersonnes WHERE numPlat = @numPlat;"))
             {
                 cmdUpdate.Parameters.AddWithValue("numSousCatégorie", this.numSousCatégorie);
@@ -143,11 +143,11 @@ namespace S201
                 {
                     lesPlats.Add(new Plat(
                         (int)dr["numPlat"],
-                        (int)dr["numSousCatégorie"],
+                        (int)dr["numSousCategorie"],
                         (int)dr["numPeriode"],
                         (string)dr["nomPlat"],
                         (double)dr["prixUnitaire"],
-                        (int)dr["delaiPréparation"],
+                        (int)dr["delaiPreparation"],
                         (int)dr["nbPersonnes"]
                     ));
                 }

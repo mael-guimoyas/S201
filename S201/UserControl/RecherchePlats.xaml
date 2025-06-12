@@ -111,6 +111,7 @@
                 </Border>
             </StackPanel>
             <DataGrid
+                x:Name="dgPlat"
                 Grid.Row="2"
                 Margin="5"
                 AutoGenerateColumns="False"
@@ -128,25 +129,6 @@
                         <Setter Property="BorderThickness" Value="0,0,1,1" />
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
-
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow">
-                        <Setter Property="Height" Value="45" />
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#E3F2FD" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </DataGrid.RowStyle>
-
-                <DataGrid.CellStyle>
-                    <Style TargetType="DataGridCell">
-                        <Setter Property="Padding" Value="12,8" />
-                        <Setter Property="BorderThickness" Value="0" />
-                        <Setter Property="VerticalAlignment" Value="Center" />
-                    </Style>
-                </DataGrid.CellStyle>
 
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding NumPlat}" Header="N° Plat" />

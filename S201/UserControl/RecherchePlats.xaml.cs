@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace S201
     /// </summary>
     public partial class RecherchePlats : UserControl
     {
-        public ListeCommande LesPlats { get; set; }
+        public ObservableCollection<Plat> lesPlats { get; set; }
         public RecherchePlats()
         {
             InitializeComponent();
@@ -30,8 +31,8 @@ namespace S201
         {
             try
             {
-                LesPlats = new ListeCommande("liste principale");
-                this.DataContext = LesPlats;
+                lesPlats = new ObservableCollection<Plat>(new Plat().FindAll());
+                dgPlat.ItemsSource = lesPlats;
             }
             catch (Exception ex)
             {
