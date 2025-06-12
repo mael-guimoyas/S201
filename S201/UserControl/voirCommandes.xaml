@@ -17,11 +17,6 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Button
-                Grid.Column="0"
-                HorizontalAlignment="Left"
-                Content="&lt;&lt; Jour précédent" />
-
             <TextBlock
                 Grid.Column="1"
                 HorizontalAlignment="Center"
@@ -29,11 +24,6 @@
                 FontSize="16"
                 FontWeight="Bold"
                 Text="Lundi 12 juin 2023" />
-
-            <Button
-                Grid.Column="2"
-                HorizontalAlignment="Right"
-                Content="Jour suivant &gt;&gt;" />
         </Grid>
 
         <!--  2. Zone des statistiques  -->
@@ -88,20 +78,26 @@
 
         <!--  4. Zone de recherche + tableau  -->
         <StackPanel>
-            <!--  Barre de recherche  -->
-            <TextBox
-                x:Name="rechercheClient"
-                Width="200"
-                Margin="0,0,0,10"
-                HorizontalAlignment="Right"
-                Text="Rechercher un client..."
-                TextChanged="rechercheClient_TextChanged" />
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Recherche par date : "/>
+                <TextBox
+                    x:Name="rechercheJour"
+                    Width="132"
+                    Text="" TextChanged="rechercheJour_TextChanged"/>
+                <Label Content="Recherche par numclient : "/>
+                <TextBox
+                    x:Name="rechercheClient"
+                    Width="134"
+                    Text=""
+                    TextChanged="rechercheClient_TextChanged" RenderTransformOrigin="0.491,0.621" />
+            </StackPanel>
 
-            <!--  Tableau des commandes  -->
+
             <DataGrid
                 x:Name="dgCommande"
                 AutoGenerateColumns="False"
                 IsReadOnly="True"
+                
                 ItemsSource="{Binding LesCommandes}">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
@@ -114,6 +110,23 @@
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
 
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#E3F2FD" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Padding" Value="12,8" />
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                    </Style>
+                </DataGrid.CellStyle>
+
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Width="*"
@@ -122,7 +135,7 @@
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding DateCommande}"
-                        Header="Heure" />
+                        Header="Date/heure" />
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding PrixTotal}"
@@ -130,11 +143,15 @@
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding EstPaye}"
-                        Header="Statut" />
+                        Header="Commande paye" />
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding EstRetire}"
-                        Header="" />
+                        Header="Commande retire" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding NumClient}"
+                        Header="Numero client" />
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
