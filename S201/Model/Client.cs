@@ -150,7 +150,7 @@ namespace S201
             }
             catch (Exception ex)
             {
-                // Log de l'erreur pour le débogage
+                
                 System.Diagnostics.Debug.WriteLine($"Erreur lors de la mise à jour du client : {ex.Message}");
                 return false;
             }

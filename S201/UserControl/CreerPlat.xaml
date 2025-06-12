@@ -80,7 +80,7 @@
                         Height="40"
                         Margin="0,18,10,17"
                         Background="#3A7BD5"
-                        Content="Enregistrer le plat" />
+                        Content="Enregistrer le plat" Click="Button_Click_1" />
                 </Grid>
             </Grid>
         </Border>

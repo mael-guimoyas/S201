@@ -117,9 +117,5 @@ namespace S201
             creerCommande.typeCommande.Text = "Modification de commande";
 
         }
-
-
-
-
     }
 }
