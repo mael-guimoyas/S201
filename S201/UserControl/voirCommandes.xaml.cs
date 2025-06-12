@@ -43,18 +43,47 @@ namespace S201
             }
         }
 
-       /* private bool RechercheClient(object obj)
+        private bool RechercheClient(object obj)
         {
-            if (String.IsNullOrEmpty(rechercheClient.Text))
+            if (string.IsNullOrWhiteSpace(rechercheClient.Text))
                 return true;
-            Commandes uneCommande = obj as Commandes;
-            return uneCommande.NumClient.ToString().StartsWith(rechercheClient.Text, StringComparison.OrdinalIgnoreCase);
-        }*/
+
+            if (obj is Commandes uneCommande)
+            {
+                // Vérifie si NumClient commence par la chaîne tapée dans rechercheClient.Text
+                return uneCommande.NumClient.ToString()
+                    .StartsWith(rechercheClient.Text, StringComparison.OrdinalIgnoreCase);
+            }
+
+            return false;
+        }
+        private bool RechercheDate(object obj)
+        {
+            if (string.IsNullOrWhiteSpace(rechercheJour.Text))
+                return true;
+
+            if (obj is Commandes uneCommande)
+            {
+                string dateStr = uneCommande.DateCommande.ToString("dd/MM/yyyy");
+                return dateStr.StartsWith(rechercheJour.Text, StringComparison.OrdinalIgnoreCase);
+            }
+
+            return false;
+        }
+
+
+
 
         private void rechercheClient_TextChanged(object sender, TextChangedEventArgs e)
         {
-           /* CollectionViewSource.GetDefaultView(dgCommande.ItemsSource).Refresh();
-            dgCommande.Items.Filter = RechercheClient;*/
+            CollectionViewSource.GetDefaultView(dgCommande.ItemsSource).Refresh();
+            dgCommande.Items.Filter = RechercheClient;
+        }
+
+        private void rechercheJour_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(dgCommande.ItemsSource).Refresh();
+            dgCommande.Items.Filter = RechercheDate;
         }
     }
 }
