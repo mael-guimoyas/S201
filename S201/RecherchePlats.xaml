@@ -44,6 +44,7 @@
                                 Grid.Column="1"
                                 Padding="5"
                                 Background="#0078D7"
+                                Click="Button_Click_1"
                                 Content="Rechercher"
                                 Foreground="White" />
                             <Button
@@ -114,15 +115,47 @@
                 Margin="5"
                 AutoGenerateColumns="False"
                 IsReadOnly="True"
-                ItemsSource="{Binding Plat}">
+                ItemsSource="{Binding Plat}"
+                SelectionChanged="DataGrid_SelectionChanged">
+
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="#F5F5F5" />
+                        <Setter Property="Foreground" Value="#333" />
+                        <Setter Property="FontWeight" Value="SemiBold" />
+                        <Setter Property="Padding" Value="12,8" />
+                        <Setter Property="BorderBrush" Value="#E0E0E0" />
+                        <Setter Property="BorderThickness" Value="0,0,1,1" />
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Height" Value="45" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#E3F2FD" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Padding" Value="12,8" />
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                    </Style>
+                </DataGrid.CellStyle>
+
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding NumPlat}" Header="N° Plat" />
-                    <DataGridTextColumn Binding="{Binding NumSousCategorie}" Header="N° SousCatéorie" />
+                    <DataGridTextColumn Binding="{Binding NumSousCatégorie}" Header="N° SousCatégorie" />
                     <DataGridTextColumn Binding="{Binding NumPeriode}" Header="N° Periode" />
                     <DataGridTextColumn Binding="{Binding NomPlat}" Header="Nom Plat" />
-                    <DataGridTextColumn Binding="{Binding PrixUnitaire}" Header="Prix" />
-                    <DataGridTextColumn Binding="{Binding DelaiPreparation}" Header="Delai" />
-                    <DataGridTextColumn Binding="{Binding NbPersonnes}" Header="Nb Personne requis" />
+                    <DataGridTextColumn Binding="{Binding PrixUnitaire}" Header="Prix Unitaire" />
+                    <DataGridTextColumn Binding="{Binding DelaiPreparation}" Header="Temps Préparation" />
+                    <DataGridTextColumn Binding="{Binding NbPersonnes}" Header="Nb Personnes requise" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

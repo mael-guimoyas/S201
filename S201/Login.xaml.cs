@@ -10,23 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace S201
 {
     /// <summary>
-    /// Logique d'interaction pour CreerPlat.xaml
+    /// Logique d'interaction pour Login.xaml
     /// </summary>
-    public partial class CreerPlat : UserControl
+    public partial class Login : Window
     {
-        public CreerPlat()
+        public Login()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
         }
     }
 }

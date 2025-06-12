@@ -20,14 +20,39 @@ namespace S201
     /// </summary>
     public partial class RecherchePlats : UserControl
     {
+        public ListeCommande LesPlats { get; set; }
         public RecherchePlats()
         {
             InitializeComponent();
+            ChargeData();
+        }
+        public void ChargeData()
+        {
+            try
+            {
+                LesPlats = new ListeCommande("liste principale");
+                this.DataContext = LesPlats;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur : " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                Application.Current.Shutdown();
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Conteneur.Content = new CreerPlat();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

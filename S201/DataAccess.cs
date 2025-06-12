@@ -13,7 +13,7 @@ namespace S201
     {
 
         private static readonly DataAccess instance = new DataAccess();
-        private readonly string connectionString = "Host=srv-peda-new;Port=5433;Username=negrima;Password=76Z4Yh;Database=DB_SAE_2.01;Options='-c search_path=Sibilia'";
+        private readonly string connectionString = "Host=srv-peda-new;Port=5433;Username=negrima;Password=76Z4Yh;Database=DB_SAE_2.01;Options='-c search_path=sibilla'";
         private NpgsqlConnection connection;
 
         public static DataAccess Instance

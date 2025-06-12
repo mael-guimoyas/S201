@@ -20,9 +20,42 @@ namespace S201
     /// </summary>
     public partial class voirCommandes : UserControl
     {
-        public voirCommandes()
+        public ListeCommande LesCommandes { get; set; }
+
+        public voirCommandes(Commandes UneCommande)
         {
+            this.DataContext = UneCommande;
             InitializeComponent();
+            ChargeData();
+        }
+
+        public void ChargeData()
+        {
+            try
+            {
+                LesCommandes = new ListeCommande("liste principale");
+                this.DataContext = LesCommandes;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur : " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                Application.Current.Shutdown();
+            }
+        }
+
+        private bool RechercheClient(object obj)
+        {
+            if (String.IsNullOrEmpty(rechercheClient.Text))
+                return true;
+            Commandes uneCommande = obj as Commandes;
+            return uneCommande.NumClient.ToString().StartsWith(rechercheClient.Text, StringComparison.OrdinalIgnoreCase);
+        }
+
+        private void rechercheClient_TextChanged(object sender, TextChangedEventArgs e)
+        {
+           /* CollectionViewSource.GetDefaultView(dgCommande.ItemsSource).Refresh();
+            dgCommande.Items.Filter = RechercheMotClefChien;*/
         }
     }
 }

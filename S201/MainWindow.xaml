@@ -9,6 +9,7 @@
     Width="800"
     Height="450"
     mc:Ignorable="d">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -64,12 +65,12 @@
                 Foreground="White" />
 
             <Button
-                x:Name="ButCom"
+                x:Name="ButComm"
                 Grid.Column="1"
                 Padding="15,5"
                 Background="White"
                 BorderThickness="0"
-                Click="ButCom_Click"
+                Click="ButComm_Click"
                 Content="Commandes"
                 FontSize="14"
                 Foreground="Black" />
