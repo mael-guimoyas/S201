@@ -127,7 +127,38 @@
                     <DataGridTextColumn Binding="{Binding NomPlat}" Header="Nom Plat" />
                     <DataGridTextColumn Binding="{Binding PrixUnitaire}" Header="Prix Unitaire" />
                     <DataGridTextColumn Binding="{Binding DelaiPreparation}" Header="Temps Préparation" />
-                    <DataGridTextColumn Binding="{Binding NbPersonnes}" Header="Nb Personnes requise" />
+                    <DataGridTextColumn
+                        Width="75"
+                        Binding="{Binding NbPersonnes}"
+                        Header="Nb Personnes" />
+                    <DataGridTemplateColumn Width="180" Header="Actions">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <Button
+                                        Margin="0,0,15,0"
+                                        Padding="8,4"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Click="Button_Click"
+                                        Content="Modifier"
+                                        Cursor="Hand"
+                                        FontSize="12"
+                                        Foreground="#2196F3">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#E3F2FD" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
