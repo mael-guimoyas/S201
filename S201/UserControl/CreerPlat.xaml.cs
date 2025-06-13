@@ -49,16 +49,18 @@ namespace S201
             bool ok = true;
             foreach (UIElement uie in formPlat.Children)
             {
-                if (uie is TextBox)
+                if (uie is TextBox txt && txt.GetBindingExpression(TextBox.TextProperty) != null)
                 {
-                    TextBox txt = (TextBox)uie;
                     txt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                    if (Validation.GetHasError(txt))
+                        ok = false;
                 }
-
-                if (Validation.GetHasError(uie))
-                    ok = false;
             }
-           DialogResult = true;
+
+            if (ok)
+                DialogResult = true;
+            else
+                MessageBox.Show("Certains champs sont invalides.", "Erreur de saisie", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private void ButAnnuler_Click(object sender, RoutedEventArgs e)

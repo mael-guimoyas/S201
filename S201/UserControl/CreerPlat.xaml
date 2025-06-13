@@ -33,7 +33,7 @@
                     <Label Content="Informations de base" />
                     <StackPanel Grid.Row="1">
                         <Label Content="Nom du Plat*" />
-                        <TextBox x:Name="TxtBoxNomPlat" Text="{Binding nomplat, ValidatesOnExceptions=True}" />
+                        <TextBox x:Name="TxtBoxNomPlat" Text="{Binding NomPlat, ValidatesOnExceptions=True}" />
                     </StackPanel>
                     <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
@@ -46,14 +46,14 @@
                             <TextBox
                                 x:Name="TxtBoxSousCatégorie"
                                 Height="20"
-                                Text="{Binding numsouscategorie, ValidatesOnExceptions=True}" />
+                                Text="{Binding NumSousCategorie, ValidatesOnExceptions=True}" />
                         </StackPanel>
                         <StackPanel Grid.Column="2">
                             <Label Content="N° Periode*" />
                             <TextBox
                                 x:Name="TxtBoxPeriode"
                                 Height="20"
-                                Text="{Binding numperiode, ValidatesOnExceptions=True}" />
+                                Text="{Binding NumPeriode, ValidatesOnExceptions=True}" />
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="3">
@@ -64,11 +64,11 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel>
                             <Label Content="Prix (€)*" />
-                            <TextBox x:Name="TxtBoxPrix" Text="{Binding prixunitaire, ValidatesOnExceptions=True}" />
+                            <TextBox x:Name="TxtBoxPrix" Text="{Binding PrixUnitaire, ValidatesOnExceptions=True}" />
                         </StackPanel>
                         <StackPanel Grid.Column="2">
                             <Label Content="Nb Personne*" />
-                            <TextBox x:Name="TxtBoxNbPersonne" Text="{Binding nbpersonnes, ValidatesOnExceptions=True}" />
+                            <TextBox x:Name="TxtBoxNbPersonne" Text="{Binding NbPersonnes, ValidatesOnExceptions=True}" />
                         </StackPanel>
                     </Grid>
                     <StackPanel Grid.Row="4">
