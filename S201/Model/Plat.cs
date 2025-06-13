@@ -85,12 +85,12 @@ namespace S201
             int nb = 0;
             using (var cmdInsert = new NpgsqlCommand("insert into plat (numsouscategorie,numperiode,nomplat,prixunitaire,delaipreparation,nbpersonnes ) values (@numsouscategorie,@numperiode,@nomplat,@prixunitaire,@delaipreparation,@nbpersonnes) RETURNING numplat"))
             {
-                cmdInsert.Parameters.AddWithValue("numsouscategorie", this.NumSousCatégorie);
-                cmdInsert.Parameters.AddWithValue("numperiode", this.NumPeriode);
-                cmdInsert.Parameters.AddWithValue("nomplat", this.NomPlat);
-                cmdInsert.Parameters.AddWithValue("prixunitaire", this.PrixUnitaire);
-                cmdInsert.Parameters.AddWithValue("delaipreparation", this.DelaiPréparation);
-                cmdInsert.Parameters.AddWithValue("nbpersonnes", this.NbPersonnes);
+                cmdInsert.Parameters.AddWithValue("numsouscategorie", (object?)this.NumSousCatégorie ?? DBNull.Value);
+                cmdInsert.Parameters.AddWithValue("numperiode", (object?)this.NumPeriode ?? DBNull.Value);
+                cmdInsert.Parameters.AddWithValue("nomplat", (object?)this.NomPlat ?? DBNull.Value);
+                cmdInsert.Parameters.AddWithValue("prixunitaire", (object?)this.PrixUnitaire ?? DBNull.Value);
+                cmdInsert.Parameters.AddWithValue("delaipreparation", (object?)this.DelaiPréparation ?? DBNull.Value);
+                cmdInsert.Parameters.AddWithValue("nbpersonnes", (object?)this.NbPersonnes ?? DBNull.Value);
                 nb = DataAccess.Instance.ExecuteInsert(cmdInsert);
             }
             this.NumPlat = nb;
@@ -124,7 +124,7 @@ namespace S201
             {
                 cmdUpdate.Parameters.AddWithValue("numsouscategorie", this.numSousCatégorie);
                 cmdUpdate.Parameters.AddWithValue("numperiode", this.numPeriode);
-                cmdUpdate.Parameters.AddWithValue("nomplat", this.nomPlat);
+                cmdUpdate.Parameters.AddWithValue("nomplat", this.NomPlat);
                 cmdUpdate.Parameters.AddWithValue("prixunitaire", this.prixUnitaire);
                 cmdUpdate.Parameters.AddWithValue("delaipreparation", this.delaiPréparation);
                 cmdUpdate.Parameters.AddWithValue("nbpersonnes", this.nbPersonnes);
