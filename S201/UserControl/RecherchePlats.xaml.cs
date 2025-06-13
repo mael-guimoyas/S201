@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.Design;
 using System.Data.Common;
 using System.Linq;
 using System.Text;
@@ -156,9 +157,12 @@ namespace S201
 
                 if (resultat > 0)
                 {
-                    Client clientAssocie = new Client(commandeEnCours.NumClient); // ou une méthode équivalente
-                    CreerCommande ucCommande = new CreerCommande(clientAssocie, commandeEnCours);
+                    Client client = Client.FindById(commandeEnCours.NumClient);
+                    ListeCommande listCommande = new ListeCommande();
+                    CreerCommande ucCommande = new CreerCommande(client, commandeEnCours, listCommande);
                     MainWindow wPrincipale = (MainWindow)Application.Current.MainWindow;
+                    ucCommande.typeCommande.Text = "Modification de commande n° : " + commandeEnCours.NumCommande;
+                    ucCommande.prixTotal.Text = commandeEnCours.PrixTotal.ToString();
                     wPrincipale.Conteneur = ucCommande;
                 }
                 else

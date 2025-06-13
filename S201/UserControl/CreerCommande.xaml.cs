@@ -30,10 +30,11 @@ namespace S201
         public ListeCommande LesCommandes { get; set; }
         public ObservableCollection<PlatCommande> PlatsDeCommande { get; set; }
 
-        public CreerCommande(Client unClient, Commandes uneCommande)
+        public CreerCommande(Client unClient, Commandes uneCommande, ListeCommande toutesLesCommandes)
         {
             InitializeComponent();
             this.commandeEnCours = uneCommande;
+            this.LesCommandes = toutesLesCommandes;
 
             List<Client> clients = new List<Client> { unClient };
             listeClient.ItemsSource = clients;
@@ -44,6 +45,7 @@ namespace S201
 
             this.DataContext = this;
         }
+
 
 
         private void ajoutClient_TextChanged(object sender, TextChangedEventArgs e)
@@ -58,17 +60,13 @@ namespace S201
                 if (resultats.Count > 0)
                 {
                     Client clientTrouve = resultats[0];
-                    this.DataContext = clientTrouve;
 
                     if (commandeEnCours != null)
                     {
                         commandeEnCours.NumClient = clientTrouve.Numclient;
                     }
                 }
-                else
-                {
-                    this.DataContext = null;
-                }
+  
             }
             else
             {
@@ -104,7 +102,6 @@ namespace S201
                 {
                     MessageBox.Show("Client mis à jour pour la commande.", "Succès");
                 }
-                this.DataContext = clientSelectionne;
             }
         }
 
@@ -135,11 +132,6 @@ namespace S201
             if (lignesSupprimees > 0)
             {
                 LesCommandes.LesCommandes.Remove(commandeEnCours);
-                MessageBox.Show("Commande annulée avec succès.");
-            }
-            else
-            {
-                MessageBox.Show("Erreur lors de l'annulation de la commande.");
             }
             voirCommandes voirCommande = new voirCommandes();
             MainWindow wPrincipale = (MainWindow)Application.Current.MainWindow;

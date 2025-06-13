@@ -26,6 +26,7 @@ namespace S201
     public partial class voirCommandes : UserControl
     {
         private Commandes commandeAModifier;
+        public TextBox RechercheJourTextBox => rechercheJour;
 
         public ListeCommande LesCommandes { get; set; }
 
@@ -101,6 +102,7 @@ namespace S201
                 Random randClient = new Random();
                 Client unClient = new Client(); // attention : initialiser ses champs
                 Commandes uneCommande = new Commandes();
+                ListeCommande lCommande = new ListeCommande();
 
                 // Exemple d'initialisation minimale
                 uneCommande.NumClient = randClient.Next(1,97);
@@ -114,7 +116,7 @@ namespace S201
                 uneCommande.NumCommande = uneCommande.Create();
                 LesCommandes.LesCommandes.Add(uneCommande);
 
-                CreerCommande creerCommande = new CreerCommande(unClient, uneCommande);
+                CreerCommande creerCommande = new CreerCommande(unClient, uneCommande, lCommande);
                 MainWindow wPrincipale = (MainWindow)Application.Current.MainWindow;
                 wPrincipale.Conteneur = creerCommande;
                 creerCommande.typeCommande.Text = "Création de commande n° : " + uneCommande.NumCommande;
@@ -130,17 +132,19 @@ namespace S201
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Commandes commande = (Commandes)((FrameworkElement)sender).DataContext;
-
+            ListeCommande listeCommande = new ListeCommande();
             Client client = Client.FindById(commande.NumClient);
 
             List<PlatCommande> plats = PlatCommande.FindByCommande(commande.NumCommande);
 
-            CreerCommande creerCommande = new CreerCommande(client, commande);
+            CreerCommande creerCommande = new CreerCommande(client, commande, listeCommande);
 
             MainWindow wPrincipale = (MainWindow)Application.Current.MainWindow;
             wPrincipale.Conteneur = creerCommande;
 
             creerCommande.typeCommande.Text = "Modification de commande n° : " + commande.NumCommande;
+            commande.CalculerEtMettreAJourPrixTotal();
+            creerCommande.prixTotal.Text = commande.PrixTotal.ToString(); 
 
         }
 

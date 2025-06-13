@@ -24,7 +24,7 @@ namespace S201
             }
         }
 
-        //  Constructeur privé pour empêcher l'instanciation multiple
+       
         private DataAccess()
         {
 
@@ -39,7 +39,7 @@ namespace S201
         }
 
 
-        // pour récupérer la connexion (et l'ouvrir si nécessaire)
+        
         public NpgsqlConnection GetConnection()
         {
             if (connection.State == ConnectionState.Closed || connection.State == ConnectionState.Broken)
@@ -58,7 +58,6 @@ namespace S201
             return connection;
         }
 
-        //  pour requêtes SELECT et retourne un DataTable ( table de données en mémoire)
         public DataTable ExecuteSelect(NpgsqlCommand cmd)
         {
             DataTable dataTable = new DataTable();
@@ -77,7 +76,7 @@ namespace S201
             return dataTable;
         }
 
-        //   pour requêtes INSERT et renvoie l'ID généré
+        
 
         public int ExecuteInsert(NpgsqlCommand cmd)
         {
@@ -98,7 +97,7 @@ namespace S201
 
 
 
-        //  pour requêtes UPDATE, DELETE
+        
         public int ExecuteSet(NpgsqlCommand cmd)
         {
             int nb = 0;
@@ -115,22 +114,7 @@ namespace S201
 
         }
 
-        // pour requêtes avec une seule valeur retour  (ex : COUNT, SUM) 
-        public object ExecuteSelectUneValeur(NpgsqlCommand cmd)
-        {
-            object res = null;
-            try
-            {
-                cmd.Connection = GetConnection();
-                res = cmd.ExecuteScalar();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            return res;
-
-        }
+        
 
         //  Fermer la connexion 
         public void CloseConnection()

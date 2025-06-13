@@ -87,15 +87,22 @@ namespace S201.Classes
 
         public int Delete()
         {
-            using (var cmdDelete = new NpgsqlCommand(
-                "DELETE FROM platcommande WHERE numcommande = @numcommande AND numplat = @numplat;"))
+            int lignesSupprimees = 0;
+            List<PlatCommande> plats = PlatCommande.FindByCommande(this.Numcommande);
+            foreach (PlatCommande plat in plats)
             {
-                cmdDelete.Parameters.AddWithValue("numcommande", this.Numcommande);
-                cmdDelete.Parameters.AddWithValue("numplat", this.Numplat);
-
-                return DataAccess.Instance.ExecuteSet(cmdDelete);
+                lignesSupprimees += plat.Delete(); 
             }
+
+            using (var cmdDeleteCommande = new NpgsqlCommand("DELETE FROM commande WHERE numcommande = @numcommande;"))
+            {
+                cmdDeleteCommande.Parameters.AddWithValue("numcommande", this.Numcommande);
+                lignesSupprimees += DataAccess.Instance.ExecuteSet(cmdDeleteCommande);
+            }
+
+            return lignesSupprimees;
         }
+
 
         public static List<PlatCommande> FindAll()
         {

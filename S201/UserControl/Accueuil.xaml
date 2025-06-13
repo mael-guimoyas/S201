@@ -106,20 +106,19 @@
                 </Border>
 
                 <!--  Tuile "Commandes du jour"  -->
-                <Border
+                <Button x:Name="butCommandeJour"
                     Grid.Column="4"
                     Height="150"
                     Padding="15"
                     Background="White"
                     BorderBrush="#E0E0E0"
-                    BorderThickness="1"
-                    CornerRadius="4">
-                    <Border.Effect>
+                    BorderThickness="1" Click="butCommandeJour_Click">
+                    <Button.Effect>
                         <DropShadowEffect
                             BlurRadius="5"
                             Opacity="0.2"
                             ShadowDepth="1" />
-                    </Border.Effect>
+                    </Button.Effect>
                     <StackPanel>
                         <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
                             <TextBlock
@@ -133,7 +132,7 @@
                         </StackPanel>
                         <TextBlock Text="Visualiser et gérer les commandes prévues pour aujourd'hui" TextWrapping="Wrap" />
                     </StackPanel>
-                </Border>
+                </Button>
             </Grid>
         </StackPanel>
     </ScrollViewer>
