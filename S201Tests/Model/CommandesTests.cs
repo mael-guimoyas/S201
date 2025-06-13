@@ -40,6 +40,18 @@ namespace S201.Tests
 
         }
 
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+
+        public void TestCreateCommandeDejaExistant()
+        {
+            Commandes commande4 = new Commandes(6, 2, 18, new DateTime(2024, 1, 15), new DateTime(2024, 1, 18), true, false, 150.50);
+            commande4.Create();
+            Commandes commande5 = new Commandes(6, 3, 19, new DateTime(2024, 1, 16), new DateTime(2024, 1, 19), false, false, 95.58);
+            commande5.Create();
+        }
+
         
     }
 }

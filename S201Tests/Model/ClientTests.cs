@@ -11,22 +11,19 @@ namespace S201.Tests
     [TestClass()]
     public class ClientTests
     {
-        
 
-        [TestMethod()]
-        public void CreateTest()
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+
+        public void TestCreateCommandeDejaExistant()
         {
-            Assert.Fail();
-        }
+            Client client1 = new Client(1, "Duponte", "Jorge", "0123456789","120 place gabriel", "75002", "Annecy");
+            client1.Create();
+            Client client2 = new Client(1, "Dupont", "Jean", "0123456789", "123 rue de la Paix", "75001", "Paris");
+            client1.Create();
 
 
-
-
-
-        [TestMethod()]
-        public void EqualsTest()
-        {
-            
         }
 
 
