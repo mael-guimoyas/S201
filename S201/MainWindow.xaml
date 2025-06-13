@@ -9,7 +9,6 @@
     Width="800"
     Height="450"
     mc:Ignorable="d">
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -17,7 +16,6 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-
         <!--  1. Barre supérieure (Header)  -->
         <Border
             Grid.Row="0"
@@ -27,9 +25,8 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
-
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-
                 <TextBlock
                     Grid.Column="0"
                     VerticalAlignment="Center"
@@ -37,22 +34,34 @@
                     FontWeight="Bold"
                     Foreground="White"
                     Text="SIBILLA - TABLEAU DE BORD VENDEUR" />
-
-                <TextBlock
-                    Grid.Column="1"
-                    VerticalAlignment="Center"
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock x:Name="lblBienvenue"
+                        VerticalAlignment="Center"
+                        Foreground="White"
+                        Text="Veuillez vous connecter"
+                        Margin="0,0,10,0" />
+                    <TextBlock x:Name="lblNomUtilisateur"
+                        VerticalAlignment="Center"
+                        Foreground="White"
+                        Text="Non connecté" />
+                </StackPanel>
+                <Button x:Name="ButDeconnexion"
+                    Grid.Column="2"
+                    Content="Déconnexion"
+                    Click="ButDeconnexion_Click"
+                    Margin="10,0,0,0"
+                    Padding="8,3"
+                    Background="Red"
                     Foreground="White"
-                    Text="Connecté en tant que: Jean Dupont (Vendeur)" />
+                    BorderThickness="0" />
             </Grid>
         </Border>
-
         <Grid Grid.Row="1" Height="30">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="110" />
                 <ColumnDefinition Width="110" />
                 <ColumnDefinition Width="110" />
             </Grid.ColumnDefinitions>
-
             <Button
                 x:Name="ButAccueil"
                 Grid.Column="0"
@@ -63,7 +72,6 @@
                 Content="Accueil"
                 FontSize="14"
                 Foreground="White" />
-
             <Button
                 x:Name="ButComm"
                 Grid.Column="1"
@@ -74,7 +82,6 @@
                 Content="Commandes"
                 FontSize="14"
                 Foreground="Black" />
-
             <Button
                 x:Name="ButClients"
                 Grid.Column="2"
@@ -86,9 +93,7 @@
                 FontSize="14"
                 Foreground="Black" />
         </Grid>
-
         <ContentControl x:Name="conteneurUC" Grid.Row="2" />
-
         <Border
             Grid.Row="3"
             Padding="10"

@@ -4,7 +4,38 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:S201"
     StartupUri="MainWindow.xaml">
-    <Application.Resources />
-    
-    
+    <Application.Resources>
+    <Style x:Key="ErrorMessage" TargetType="TextBlock">
+        
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Margin" Value="5,0,0,0"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Style pour ErrorBorder -->
+        <Style x:Key="ErrorBorder" TargetType="Border">
+            <Setter Property="Background" Value="#FFEBEE"/>
+            
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="Margin" Value="0,5,0,15"/>
+            <Setter Property="Visibility" Value="Collapsed"/>
+        </Style>
+
+        <!-- Style pour PasswordBorder -->
+        <Style x:Key="PasswordBorder" TargetType="Border">
+            
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+
+
+    </Application.Resources>
+
+
+
 </Application>
