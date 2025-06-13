@@ -105,11 +105,13 @@ namespace S201
 
         private void SetActiveButton(string activeButton)
         {
+            // Couleurs
             var activeBackground = new SolidColorBrush(Color.FromRgb(25, 118, 210));
             var activeForeground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
             var inactiveBackground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
             var inactiveForeground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
 
+            // Réinitialiser tous les boutons
             ButAccueil.Background = inactiveBackground;
             ButAccueil.Foreground = inactiveForeground;
             ButClients.Background = inactiveBackground;
@@ -117,6 +119,7 @@ namespace S201
             ButComm.Background = inactiveBackground;
             ButComm.Foreground = inactiveForeground;
 
+            // Activer le bouton sélectionné
             switch (activeButton)
             {
                 case "Accueil":
