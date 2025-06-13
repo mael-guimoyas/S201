@@ -49,6 +49,7 @@
                     Padding="5"
                     HorizontalAlignment="Right"
                     Background="#FF0082E6"
+                    Foreground="White"
                     Click="butCommande_Click"
                     Content="Creer une commande" />
             </StackPanel>

@@ -1,4 +1,5 @@
 ﻿using Npgsql;
+using S201.Classes;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -108,20 +109,25 @@ namespace S201
 
         public void Read()
         {
-            using (var cmdSelect = new NpgsqlCommand("select * from commande where numcommande =@numcommande;"))
+            using (var cmdSelect = new NpgsqlCommand("SELECT * FROM commande WHERE numcommande = @numcommande;"))
             {
                 cmdSelect.Parameters.AddWithValue("numcommande", this.NumCommande);
 
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
-                this.NumClient = (int)dt.Rows[0]["numclient"];
-                this.NumEmploye = (int)dt.Rows[0]["numemploye"];
-                this.DateCommande = (DateTime)dt.Rows[0]["datecommande"];
-                this.DateRetraitCommande = (DateTime)dt.Rows[0]["dateretraitprevue"];
-                this.EstPaye = (bool)dt.Rows[0]["payee"];
-                this.EstRetire = (bool)dt.Rows[0]["retiree"];
-                this.PrixTotal = (double)dt.Rows[0]["prixtotal"];
+                if (dt.Rows.Count > 0)
+                {
+                    this.NumClient = (int)dt.Rows[0]["numclient"];
+                    this.NumEmploye = (int)dt.Rows[0]["numemploye"];
+                    this.DateCommande = (DateTime)dt.Rows[0]["datecommande"];
+                    this.DateRetraitCommande = (DateTime)dt.Rows[0]["dateretraitprevue"];
+                    this.EstPaye = (bool)dt.Rows[0]["payee"];
+                    this.EstRetire = (bool)dt.Rows[0]["retiree"];
+
+                    this.CalculerPrixTotalDepuisPlats();
+                }
             }
         }
+
 
         public int Update()
         {
@@ -146,13 +152,12 @@ namespace S201
         public List<Commandes> FindAll()
         {
             List<Commandes> lesCommandes = new List<Commandes>();
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from commande ;"))
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("SELECT * FROM commande;"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
                 {
-                    Console.WriteLine($"Ligne : {dr["numcommande"]}, {dr["numclient"]}, {dr["numemploye"]}");
-                    lesCommandes.Add(new Commandes(
+                    var commande = new Commandes(
                         (int)dr["numcommande"],
                         (int)dr["numclient"],
                         (int)dr["numemploye"],
@@ -160,12 +165,16 @@ namespace S201
                         (DateTime)dr["dateretraitprevue"],
                         (bool)dr["payee"],
                         (bool)dr["retiree"],
-                        (double)dr["prixtotal"]
-                    ));
+                        0
+                    );
+
+                    commande.CalculerPrixTotalDepuisPlats();
+                    lesCommandes.Add(commande);
                 }
-                return lesCommandes;
             }
+            return lesCommandes;
         }
+
 
         public List<Commandes> FindBySelection(string criteres)
         {
@@ -180,5 +189,25 @@ namespace S201
                 return DataAccess.Instance.ExecuteSet(cmdUpdate);
             }
         }
+
+        public void CalculerEtMettreAJourPrixTotal()
+        {
+            List<PlatCommande> plats = PlatCommande.FindByCommande(this.NumCommande);
+            double total = 0;
+            foreach (PlatCommande plat in plats)
+            {
+                total += plat.Quantite * plat.Prix;
+            }
+            this.PrixTotal = total;
+            this.Update();
+        }
+        private void CalculerPrixTotalDepuisPlats()
+        {
+            List<PlatCommande> plats = PlatCommande.FindByCommande(this.NumCommande);
+            this.PrixTotal = plats.Sum(p => p.Quantite * p.Prix);
+            this.Update();
+        }
+
+
     }
 }

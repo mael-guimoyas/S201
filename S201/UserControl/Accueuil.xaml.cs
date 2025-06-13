@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,6 +60,14 @@ namespace S201
                     //MessageBox.Show(this, "Le plat n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+
+        private void butCommandeJour_Click(object sender, RoutedEventArgs e)
+        {
+            voirCommandes voirCommandes = new voirCommandes();
+
+            MainWindow wPrincipale = (MainWindow)Application.Current.MainWindow;
+            wPrincipale.Conteneur = voirCommandes;
         }
     }
 }
