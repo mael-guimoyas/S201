@@ -61,8 +61,8 @@ namespace S201
         }
 
         private void ButAnnuler_Click(object sender, RoutedEventArgs e)
-        { 
-
+        {
+            DialogResult = true;
 
         }
     }
