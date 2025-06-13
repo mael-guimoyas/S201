@@ -99,15 +99,158 @@ namespace S201
 
         private void ButComm_Click(object sender, RoutedEventArgs e)
         {
-            voirCommandes voirCommandes = new voirCommandes();
-            Conteneur.Content = voirCommandes;
-            voirCommandes.labelDateJour.Text = DateTime.Now.ToString();
-            ButComm.Background = new SolidColorBrush(Color.FromRgb(25, 118, 210));
-            ButComm.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-            ButAccueil.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-            ButAccueil.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
-            ButClients.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-            ButClients.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            Conteneur = new voirCommandes();
+            SetActiveButton("Commandes");
+        }
+
+        private void SetActiveButton(string activeButton)
+        {
+            var activeBackground = new SolidColorBrush(Color.FromRgb(25, 118, 210));
+            var activeForeground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            var inactiveBackground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            var inactiveForeground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+
+            ButAccueil.Background = inactiveBackground;
+            ButAccueil.Foreground = inactiveForeground;
+            ButClients.Background = inactiveBackground;
+            ButClients.Foreground = inactiveForeground;
+            ButComm.Background = inactiveBackground;
+            ButComm.Foreground = inactiveForeground;
+
+            switch (activeButton)
+            {
+                case "Accueil":
+                    ButAccueil.Background = activeBackground;
+                    ButAccueil.Foreground = activeForeground;
+                    break;
+                case "Clients":
+                    ButClients.Background = activeBackground;
+                    ButClients.Foreground = activeForeground;
+                    break;
+                case "Commandes":
+                    ButComm.Background = activeBackground;
+                    ButComm.Foreground = activeForeground;
+                    break;
+            }
+        }
+
+        public bool WindowConnecter()
+        {
+            try
+            {
+                Connexion fconnexion = new Connexion();
+                bool? result = fconnexion.ShowDialog();
+
+                if (result == true)
+                {
+                    // Récupérer l'employé connecté
+                    EmployeConnecte = fconnexion.EmployeConnecte;
+
+                    if (EmployeConnecte != null)
+                    {
+                        // NOUVEAU : Mettre à jour l'affichage du nom utilisateur
+                        MettreAJourNomUtilisateur();
+
+                        // Optionnel : afficher un message de bienvenue
+                        // MessageBox.Show($"Bienvenue {EmployeConnecte.NomEmploye} !", "Connexion réussie", MessageBoxButton.OK, MessageBoxImage.Information);
+                        return true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Erreur lors de la récupération des informations utilisateur.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return false;
+                    }
+                }
+                else
+                {
+                    // L'utilisateur a annulé la connexion
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erreur lors de la connexion : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
+
+        // NOUVELLE MÉTHODE : Mettre à jour l'affichage du nom utilisateur
+        private void MettreAJourNomUtilisateur()
+        {
+            if (EmployeConnecte != null)
+            {
+                // Rechercher les contrôles dans le XAML pour afficher le nom
+                var lblNomUtilisateur = this.FindName("lblNomUtilisateur") as TextBlock;
+                var lblBienvenue = this.FindName("lblBienvenue") as TextBlock;
+
+                if (lblNomUtilisateur != null)
+                {
+                    lblNomUtilisateur.Text = $"{EmployeConnecte.PrenomEmploye} {EmployeConnecte.NomEmploye}";
+                }
+
+                if (lblBienvenue != null)
+                {
+                    lblBienvenue.Text = $"Bienvenue, {EmployeConnecte.PrenomEmploye} !";
+                }
+
+                // Mettre à jour le titre de la fenêtre
+                this.Title = $"Application S201 - Connecté en tant que : {EmployeConnecte.PrenomEmploye} {EmployeConnecte.NomEmploye}";
+            }
+        }
+
+        // Méthode pour se déconnecter (modifiée)
+        public void SeDeconnecter()
+        {
+            EmployeConnecte = null;
+
+            // Réinitialiser l'affichage utilisateur
+            ResetAffichageUtilisateur();
+
+            this.Hide();
+
+            if (!WindowConnecter())
+            {
+                Application.Current.Shutdown();
+            }
+            else
+            {
+                this.Show();
+                ChargeData();
+                conteneurUC.Content = new Accueuil();
+            }
+        }
+
+        // NOUVELLE MÉTHODE : Réinitialiser l'affichage utilisateur
+        private void ResetAffichageUtilisateur()
+        {
+            var lblNomUtilisateur = this.FindName("lblNomUtilisateur") as TextBlock;
+            var lblBienvenue = this.FindName("lblBienvenue") as TextBlock;
+
+            if (lblNomUtilisateur != null)
+            {
+                lblNomUtilisateur.Text = "Non connecté";
+            }
+
+            if (lblBienvenue != null)
+            {
+                lblBienvenue.Text = "Veuillez vous connecter";
+            }
+
+            this.Title = "Application S201";
+        }
+
+        // NOUVELLE MÉTHODE : Bouton de déconnexion (optionnel)
+        private void ButDeconnexion_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Êtes-vous sûr de vouloir vous déconnecter ?",
+                                       "Confirmation",
+                                       MessageBoxButton.YesNo,
+                                       MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                SeDeconnecter();
+            }
         }
     }
 }
