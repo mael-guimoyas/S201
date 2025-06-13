@@ -127,19 +127,6 @@ namespace S201
             }
         }
 
-        // Afficher tout client
-        private void btnAfficherTout_Click(object sender, RoutedEventArgs e)
-        {
-            txtRecherche.Text = "";
-            var view = CollectionViewSource.GetDefaultView(dgClients.ItemsSource);
-            if (view != null)
-            {
-                view.Filter = null;
-                view.Refresh();
-               
-            }
-        }
-
         private void btnAjouter_Click(object sender, RoutedEventArgs e)
         {
             CreerClient creerClient = new CreerClient();

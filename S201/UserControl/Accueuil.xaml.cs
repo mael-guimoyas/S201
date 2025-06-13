@@ -20,14 +20,45 @@ namespace S201
     /// </summary>
     public partial class Accueuil : UserControl
     {
+        private ListeCommande LesCommandes;
         public Accueuil()
         {
             InitializeComponent();
+            ChargeData();
+        }
+        public void ChargeData()
+        {
+            try
+            {
+                LesCommandes = new ListeCommande("liste principale");
+                this.DataContext = LesCommandes;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur : " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                Application.Current.Shutdown();
+            }
         }
 
         private void ButPlat_Click(object sender, RoutedEventArgs e)
         {
-            Conteneur.Content = new CreerPlat();
+            Plat unplat = new Plat();
+            CreerPlat wPlat = new CreerPlat(unplat, CreerPlat.Action.Créer);
+            bool? result = wPlat.ShowDialog();
+            if (result == true)
+            {
+
+                try
+                {
+                    unplat.NumPlat = unplat.Create();
+                    LesCommandes.LesPlats.Add(unplat);
+                }
+                catch (Exception ex)
+                {
+                    //MessageBox.Show(this, "Le plat n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }
