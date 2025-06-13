@@ -45,7 +45,6 @@
                                 Padding="5"
                                 VerticalAlignment="Top"
                                 Background="#007800"
-                                Click="Button_Click"
                                 Content="Créer"
                                 Foreground="White" />
                         </Grid>
@@ -135,12 +134,12 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                                    <Button
+                                    <Button x:Name="butAjouterACommande"
                                         Margin="0,0,15,0"
                                         Padding="8,4"
                                         Background="Transparent"
                                         BorderThickness="0"
-                                        Click="Button_Click"
+                                        Click="butAjouterACommande_Click"
                                         Content="Ajouter"
                                         Cursor="Hand"
                                         FontSize="12"
@@ -160,7 +159,6 @@
                                         Padding="8,4"
                                         Background="Transparent"
                                         BorderThickness="0"
-                                        Click="Button_Click"
                                         Content="Modifier"
                                         Cursor="Hand"
                                         FontSize="12"

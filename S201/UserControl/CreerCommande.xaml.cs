@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.Design;
 using System.Data.Common;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,19 +27,25 @@ namespace S201
     public partial class CreerCommande : UserControl
     {
         private Commandes commandeEnCours;
+        public ListeCommande LesCommandes { get; set; }
         public ObservableCollection<PlatCommande> PlatsDeCommande { get; set; }
 
         public CreerCommande(Client unClient, Commandes uneCommande)
         {
             InitializeComponent();
+            CalculeTotal();
             this.commandeEnCours = uneCommande;
+
             List<Client> clients = new List<Client> { unClient };
             listeClient.ItemsSource = clients;
             listeClient.SelectedItem = unClient;
-            List<PlatCommande> plats = PlatCommande.FindByCommande(commandeEnCours.NumCommande);
-            this.DataContext = this;
 
+            List<PlatCommande> plats = PlatCommande.FindByCommande(commandeEnCours.NumCommande);
+            PlatsDeCommande = new ObservableCollection<PlatCommande>(plats);
+
+            this.DataContext = this;
         }
+
 
         private void ajoutClient_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -87,16 +94,10 @@ namespace S201
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {           
-            RecherchePlats recherchePlats = new RecherchePlats();
-            MainWindow wPrincipale = (MainWindow)Application.Current.MainWindow;
-            wPrincipale.Conteneur = recherchePlats;
-        }
         private void CalculeTotal()
         {
             PlatCommande platCommande = new PlatCommande();
-            prixTotal.Text += platCommande.Prix;
+            prixTotal.Text += platCommande.PrixTotal;
         }
 
         private void listeClient_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -113,5 +114,44 @@ namespace S201
                 this.DataContext = clientSelectionne;
             }
         }
+
+        private void butAjoutPlat_Click(object sender, RoutedEventArgs e)
+        {
+            RecherchePlats recherchePlats = new RecherchePlats(commandeEnCours);
+            MainWindow wPrincipale = (MainWindow)Application.Current.MainWindow;
+            wPrincipale.Conteneur = recherchePlats;
+        }
+
+        private void butValider_Click(object sender, RoutedEventArgs e)
+        {
+            voirCommandes voirCommande = new voirCommandes();
+            MainWindow wPrincipale = (MainWindow)Application.Current.MainWindow;
+            wPrincipale.Conteneur = voirCommande;
+        }
+
+        private void butAnnulerCommande_Click(object sender, RoutedEventArgs e)
+        {
+            if (commandeEnCours == null)
+            {
+                MessageBox.Show("Aucune commande sélectionnée.");
+                return;
+            }
+            // Supprime d'abord en base
+            int lignesSupprimees = commandeEnCours.Delete();
+
+            if (lignesSupprimees > 0)
+            {
+                LesCommandes.LesCommandes.Remove(commandeEnCours);
+                MessageBox.Show("Commande annulée avec succès.");
+            }
+            else
+            {
+                MessageBox.Show("Erreur lors de l'annulation de la commande.");
+            }
+            voirCommandes voirCommande = new voirCommandes();
+            MainWindow wPrincipale = (MainWindow)Application.Current.MainWindow;
+            wPrincipale.Conteneur = voirCommande;
+        }
+
     }
 }

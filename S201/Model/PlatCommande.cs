@@ -32,6 +32,7 @@ namespace S201.Classes
         public int Numplat { get => numplat; set => numplat = value; }
         public int Quantite { get => quantite; set => quantite = value; }
         public double Prix { get => prix; set => prix = value; }
+        public double PrixTotal { get => prix * quantite; }
 
         public override bool Equals(object? obj)
         {
@@ -44,7 +45,7 @@ namespace S201.Classes
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Numcommande, Numplat, Quantite, Prix);
+            return HashCode.Combine(Numcommande, Numplat, Quantite, Prix, PrixTotal);
         }
 
         public override string? ToString()

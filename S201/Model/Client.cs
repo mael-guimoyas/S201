@@ -22,6 +22,11 @@ namespace S201
         {
         }
 
+        public Client(int numclient)
+        {
+            Numclient = numclient;
+        }
+
         public Client(int numclient, string nomclient, string prenomclient, string tel, string adresserue, string adressecp, string adresseville)
         {
             Numclient = numclient;
