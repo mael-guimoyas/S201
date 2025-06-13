@@ -33,7 +33,6 @@ namespace S201
         public CreerCommande(Client unClient, Commandes uneCommande)
         {
             InitializeComponent();
-            CalculeTotal();
             this.commandeEnCours = uneCommande;
 
             List<Client> clients = new List<Client> { unClient };
@@ -94,12 +93,6 @@ namespace S201
             }
         }
 
-        private void CalculeTotal()
-        {
-            PlatCommande platCommande = new PlatCommande();
-            prixTotal.Text += platCommande.PrixTotal;
-        }
-
         private void listeClient_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (listeClient.SelectedItem is Client clientSelectionne)
@@ -152,6 +145,5 @@ namespace S201
             MainWindow wPrincipale = (MainWindow)Application.Current.MainWindow;
             wPrincipale.Conteneur = voirCommande;
         }
-
     }
 }

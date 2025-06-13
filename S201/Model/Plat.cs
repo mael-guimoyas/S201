@@ -85,12 +85,12 @@ namespace S201
             int nb = 0;
             using (var cmdInsert = new NpgsqlCommand("insert into plat (numsouscategorie,numperiode,nomplat,prixunitaire,delaipreparation,nbpersonnes ) values (@numsouscategorie,@numperiode,@nomplat,@prixunitaire,@delaipreparation,@nbpersonnes) RETURNING numplat"))
             {
-                cmdInsert.Parameters.AddWithValue("numsouscategorie", this.numSousCatégorie);
-                cmdInsert.Parameters.AddWithValue("numperiode", this.numPeriode);
-                cmdInsert.Parameters.AddWithValue("nomplat", this.nomPlat);
-                cmdInsert.Parameters.AddWithValue("prixunitaire", this.prixUnitaire);
-                cmdInsert.Parameters.AddWithValue("delaipreparation", this.delaiPréparation);
-                cmdInsert.Parameters.AddWithValue("nbpersonnes", this.nbPersonnes);
+                cmdInsert.Parameters.AddWithValue("numsouscategorie", this.NumSousCatégorie);
+                cmdInsert.Parameters.AddWithValue("numperiode", this.NumPeriode);
+                cmdInsert.Parameters.AddWithValue("nomplat", this.NomPlat);
+                cmdInsert.Parameters.AddWithValue("prixunitaire", this.PrixUnitaire);
+                cmdInsert.Parameters.AddWithValue("delaipreparation", this.DelaiPréparation);
+                cmdInsert.Parameters.AddWithValue("nbpersonnes", this.NbPersonnes);
                 nb = DataAccess.Instance.ExecuteInsert(cmdInsert);
             }
             this.NumPlat = nb;
@@ -118,16 +118,16 @@ namespace S201
         public int Update()
         {
             using (var cmdUpdate = new NpgsqlCommand(
-                "UPDATE commande SET numSousCategorie = @numSousCategorie, numPeriode = @numPeriode, " +
-                "nomPlat = @nomPlat, prixUnitaire = @prixUnitaire, delaiPreparation = @delaiPreparation, " +
-                "nbPersonnes = @nbPersonnes WHERE numPlat = @numPlat;"))
+                "UPDATE plat SET numsouscategorie = @numsouscategorie, numperiode = @numperiode, " +
+                "nomplat = @nomplat, prixunitaire = @prixunitaire, delaipreparation = @delaipreparation, " +
+                "nbpersonnes = @nbpersonnes WHERE numplat = @numplat;"))
             {
-                cmdUpdate.Parameters.AddWithValue("numSousCatégorie", this.numSousCatégorie);
-                cmdUpdate.Parameters.AddWithValue("numPeriode", this.numPeriode);
-                cmdUpdate.Parameters.AddWithValue("nomPlat", this.nomPlat);
-                cmdUpdate.Parameters.AddWithValue("prixUnitaire", this.prixUnitaire);
-                cmdUpdate.Parameters.AddWithValue("delaiPréparation", this.delaiPréparation);
-                cmdUpdate.Parameters.AddWithValue("nbPersonnes", this.nbPersonnes);
+                cmdUpdate.Parameters.AddWithValue("numsouscategorie", this.numSousCatégorie);
+                cmdUpdate.Parameters.AddWithValue("numperiode", this.numPeriode);
+                cmdUpdate.Parameters.AddWithValue("nomplat", this.nomPlat);
+                cmdUpdate.Parameters.AddWithValue("prixunitaire", this.prixUnitaire);
+                cmdUpdate.Parameters.AddWithValue("delaipreparation", this.delaiPréparation);
+                cmdUpdate.Parameters.AddWithValue("nbpersonnes", this.nbPersonnes);
 
                 return DataAccess.Instance.ExecuteSet(cmdUpdate);
             }
@@ -136,19 +136,19 @@ namespace S201
         public List<Plat> FindAll()
         {
             List<Plat> lesPlats = new List<Plat>();
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("SELECT * FROM Plat;"))
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("SELECT * FROM plat;"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows) 
                 {
                     lesPlats.Add(new Plat(
-                        (int)dr["numPlat"],
-                        (int)dr["numSousCategorie"],
-                        (int)dr["numPeriode"],
-                        (string)dr["nomPlat"],
-                        (double)dr["prixUnitaire"],
-                        (int)dr["delaiPreparation"],
-                        (int)dr["nbPersonnes"]
+                        (int)dr["numplat"],
+                        (int)dr["numsouscategorie"],
+                        (int)dr["numperiode"],
+                        (string)dr["nomplat"],
+                        (double)dr["prixunitaire"],
+                        (int)dr["delaipreparation"],
+                        (int)dr["nbpersonnes"]
                     ));
                 }
             }
@@ -162,9 +162,9 @@ namespace S201
 
         public int Delete()
         {
-            using (var cmdUpdate = new NpgsqlCommand("delete from Plat  where numPlat =@numPlat;"))
+            using (var cmdUpdate = new NpgsqlCommand("delete from plat  where numplat =@numplat;"))
             {
-                cmdUpdate.Parameters.AddWithValue("numPlat", this.NumPlat);
+                cmdUpdate.Parameters.AddWithValue("numplat", this.NumPlat);
                 return DataAccess.Instance.ExecuteSet(cmdUpdate);
             }
         }

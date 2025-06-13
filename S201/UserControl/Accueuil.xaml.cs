@@ -56,7 +56,7 @@ namespace S201
                 }
                 catch (Exception ex)
                 {
-                    //MessageBox.Show(this, "Le plat n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Le plat n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

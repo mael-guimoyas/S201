@@ -24,6 +24,7 @@ namespace S201
             this.NumCommande = numCommande;
             this.LesCommandes = new ObservableCollection<Commandes>(new Commandes().FindAll());
             this.LesClients = new ObservableCollection<Client>(new Client().FindAll());
+            this.LesPlats = new ObservableCollection<Plat>(new Plat().FindAll());
             this.LesPlatCommandes = new ObservableCollection<Client>(new Client().FindAll());
 
         }
@@ -49,7 +50,7 @@ namespace S201
             return true;
         }
 
-        /*
+        
         public bool AjouterPlat(Plat unPlat)
         {
             if (unPlat == null || LesPlats.Contains(unPlat))
@@ -58,7 +59,7 @@ namespace S201
             LesPlats.Add(unPlat);
             return true;
         }
-        */
+        
 
         // Supprime une commande existante
         public bool SupprimerCommande(Commandes commande)
