@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="S201.Model.Categorie">
+    <Position X="3.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Categorie.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="S201.Model.Employe">
+    <Position X="9" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAEACAAJAgAAQCIAgAAECAEICAAAQAgAAEAA=</HashCode>
+      <FileName>Model\Employe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="S201.Model.Role" BaseTypeListCollapsed="true">
+    <Position X="1.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAIAAAAAgAAAAAQCAAggAEAAkAAAAgAAAAAAAA=</HashCode>
+      <FileName>Model\Role.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="S201.Model.SousCategorie">
+    <Position X="3.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\SousCategorie.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="S201.Client">
+    <Position X="3.25" Y="1.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AgQAAgIAAAAAiAAEgIgQAIAAAACBAMAAAkABAAIAAQI=</HashCode>
+      <FileName>Model\Client.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="S201.Commandes" BaseTypeListCollapsed="true">
+    <Position X="5.25" Y="1.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAAACBAAAKAQAEiAEYCAAgCAEDAMAAgQEAAAAAAiA=</HashCode>
+      <FileName>Model\Commandes.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="S201.DataAccess">
+    <Position X="9" Y="3.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAgAAAABIBAAAABAABAAQAgAABAAAAA=</HashCode>
+      <FileName>Model\DataAccess.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="S201.ListeCommande">
+    <Position X="5.25" Y="6.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAABAABAAwAAAAAgAAAKQAQAAAACAAEgAEADQAAAAA=</HashCode>
+      <FileName>Model\ListeCommande.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="S201.Plat">
+    <Position X="1.5" Y="1.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAUQAAAAAQgAIAEFgAAQCIIgAAECAMAAAAAACIAgEiA=</HashCode>
+      <FileName>Model\Plat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="S201.Classes.PlatCommande">
+    <Position X="7.25" Y="5.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAUACAAAAAAAAAAEyAAQAEAAAAEBAMgAAQAIAAEBAAg=</HashCode>
+      <FileName>Model\PlatCommande.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="S201.ICrud&lt;T&gt;">
+    <Position X="3.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAQAAAgAAEAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\ICrud.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
