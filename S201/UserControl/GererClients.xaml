@@ -25,10 +25,11 @@
 
             <Label
                 Grid.Column="0"
+                Margin="0,0,27,0"
                 VerticalAlignment="Center"
                 Content="Clients"
                 FontSize="24"
-                FontWeight="Bold" Margin="0,0,27,0" />
+                FontWeight="Bold" />
 
             <StackPanel
                 Grid.Column="1"
@@ -36,8 +37,7 @@
                 Orientation="Horizontal">
                 <TextBox
                     x:Name="txtRecherche"
-                    TextChanged="txtRecherche_TextChanged"
-                    Width="186"
+                    Width="200"
                     Height="42"
                     Margin="0,0,15,0"
                     Padding="10,8"
@@ -46,18 +46,8 @@
                     BorderThickness="1"
                     FontSize="14"
                     Foreground="Gray"
-                    Text="" />
-                <Button
-                    x:Name="btnAfficherTout"
-                    Height="35"
-                    Margin="0,0,10,0"
-                    Padding="20,8"
-                    Background="#FF9800"
-                    BorderThickness="0"
-                    Click="btnAfficherTout_Click"
-                    Content="Afficher tout"
-                    FontSize="14"
-                    Foreground="White" />
+                    Text=""
+                    TextChanged="txtRecherche_TextChanged" />
                 <Button
                     x:Name="btnAjouter"
                     Height="35"

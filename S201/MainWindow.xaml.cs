@@ -1,4 +1,6 @@
 ﻿using S201;
+using S201.Model;
+using S201.Windows;
 using System;
 using System.Text;
 using System.Windows;
@@ -16,12 +18,10 @@ namespace S201
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    /// 
-    /// 
     public partial class MainWindow : Window
     {
-        
         public ListeCommande LesCommandes { get; set; }
+        public Employe EmployeConnecte { get; set; }
 
         public UserControl Conteneur
         {
@@ -29,15 +29,28 @@ namespace S201
             set => conteneurUC.Content = value;
         }
 
-
         public MainWindow()
         {
             InitializeComponent();
+
+            // Ne pas charger les données ni afficher le contenu tant que l'utilisateur n'est pas connecté
+            this.Loaded += MainWindow_Loaded;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Démarrer le processus de connexion dès que la fenêtre est chargée
+            if (!WindowConnecter())
+            {
+                // Si la connexion échoue ou est annulée, fermer l'application
+                Application.Current.Shutdown();
+                return;
+            }
+
+            // Une fois connecté, charger les données et afficher l'accueil
             ChargeData();
             conteneurUC.Content = new Accueuil();
         }
-
-       
 
         public void ChargeData()
         {
@@ -48,8 +61,7 @@ namespace S201
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erreur : " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
-
+                MessageBox.Show("Erreur lors du chargement des données : " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 Application.Current.Shutdown();
             }
         }
@@ -68,32 +80,21 @@ namespace S201
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(this, "L n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(this, "La commande n'a pas pu être créée.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-
         }
 
         private void ButAccueil_Click(object sender, RoutedEventArgs e)
         {
-            Conteneur.Content = new Accueuil();
-            ButComm.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-            ButComm.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
-            ButAccueil.Background = new SolidColorBrush(Color.FromRgb(25, 118, 210));
-            ButAccueil.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-            ButClients.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-            ButClients.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            Conteneur = new Accueuil();
+            SetActiveButton("Accueil");
         }
 
         private void ButClients_Click(object sender, RoutedEventArgs e)
         {
-            Conteneur.Content = new GererClients();
-            ButComm.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-            ButComm.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
-            ButAccueil.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-            ButAccueil.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
-            ButClients.Background = new SolidColorBrush(Color.FromRgb(25, 115, 210));
-            ButClients.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            Conteneur = new GererClients();
+            SetActiveButton("Clients");
         }
 
         private void ButComm_Click(object sender, RoutedEventArgs e)

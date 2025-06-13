@@ -83,14 +83,14 @@ namespace S201
         public int Create()
         {
             int nb = 0;
-            using (var cmdInsert = new NpgsqlCommand("insert into Plat (NumSousCategorie,NumPeriode,NomPlat,PrixUnitaire,DelaiPreparation,NbPersonnes ) values (@NumSousCategorie,@NumPeriode,@NomPlat,@PrixUnitaire,@DelaiPreparation,@NbPersonnes) RETURNING idPlat"))
+            using (var cmdInsert = new NpgsqlCommand("insert into plat (numsouscategorie,numperiode,nomplat,prixunitaire,delaipreparation,nbpersonnes ) values (@numsouscategorie,@numperiode,@nomplat,@prixunitaire,@delaipreparation,@nbpersonnes) RETURNING numplat"))
             {
-                cmdInsert.Parameters.AddWithValue("NumSousCategorie", this.numSousCatégorie);
-                cmdInsert.Parameters.AddWithValue("NumPeriode", this.numPeriode);
-                cmdInsert.Parameters.AddWithValue("NomPlat", this.nomPlat);
-                cmdInsert.Parameters.AddWithValue("PrixUnitaire", this.prixUnitaire);
-                cmdInsert.Parameters.AddWithValue("DelaiPréparation", this.delaiPréparation);
-                cmdInsert.Parameters.AddWithValue("NbPersonnes", this.nbPersonnes);
+                cmdInsert.Parameters.AddWithValue("numsouscategorie", this.numSousCatégorie);
+                cmdInsert.Parameters.AddWithValue("numperiode", this.numPeriode);
+                cmdInsert.Parameters.AddWithValue("nomplat", this.nomPlat);
+                cmdInsert.Parameters.AddWithValue("prixunitaire", this.prixUnitaire);
+                cmdInsert.Parameters.AddWithValue("delaipreparation", this.delaiPréparation);
+                cmdInsert.Parameters.AddWithValue("nbpersonnes", this.nbPersonnes);
                 nb = DataAccess.Instance.ExecuteInsert(cmdInsert);
             }
             this.NumPlat = nb;
@@ -99,17 +99,17 @@ namespace S201
 
         public void Read()
         {
-            using (var cmdSelect = new NpgsqlCommand("select * from Plat where numPlat =@numPlat;"))
+            using (var cmdSelect = new NpgsqlCommand("select * from plat where numplat =@numplat;"))
             {
-                cmdSelect.Parameters.AddWithValue("numPlat", this.NumPlat);
+                cmdSelect.Parameters.AddWithValue("numplat", this.NumPlat);
 
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
-                this.numSousCatégorie = (int)dt.Rows[0]["numSousCategorie"];
-                this.numPeriode = (int)dt.Rows[0]["numPeriode"];
-                this.nomPlat = (string)dt.Rows[0]["nomPlat"];
-                this.PrixUnitaire = (double)dt.Rows[0]["prixUnitaire"];
-                this.delaiPréparation = (int)dt.Rows[0]["delaiPreparation"];
-                this.nbPersonnes = (int)dt.Rows[0]["nbPersonnes"];
+                this.numSousCatégorie = (int)dt.Rows[0]["numsouscategorie"];
+                this.numPeriode = (int)dt.Rows[0]["numperiode"];
+                this.nomPlat = (string)dt.Rows[0]["nomplat"];
+                this.PrixUnitaire = (double)dt.Rows[0]["prixunitaire"];
+                this.delaiPréparation = (int)dt.Rows[0]["delaipreparation"];
+                this.nbPersonnes = (int)dt.Rows[0]["nbpersonnes"];
 
             }
 

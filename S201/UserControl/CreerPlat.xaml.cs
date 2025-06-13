@@ -18,19 +18,51 @@ namespace S201
     /// <summary>
     /// Logique d'interaction pour CreerPlat.xaml
     /// </summary>
-    public partial class CreerPlat : UserControl
+    public partial class CreerPlat : Window 
     {
-        public CreerPlat()
+        public enum Action { Modifier, Créer}
+        private ListeCommande LesCommandes; 
+        public CreerPlat(Plat unplat,Action plat)
         {
+            this.DataContext = unplat;
             InitializeComponent();
+            ChargeData();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public void ChargeData()
         {
+            try
+            {
+                LesCommandes = new ListeCommande("liste principale");
+                this.DataContext = LesCommandes;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur : " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                Application.Current.Shutdown();
+            }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void ButValider_Click(object sender, RoutedEventArgs e)
         {
+            bool ok = true;
+            foreach (UIElement uie in formPlat.Children)
+            {
+                if (uie is TextBox)
+                {
+                    TextBox txt = (TextBox)uie;
+                    txt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                }
+
+                if (Validation.GetHasError(uie))
+                    ok = false;
+            }
+           DialogResult = true;
+        }
+
+        private void ButAnnuler_Click(object sender, RoutedEventArgs e)
+        { 
 
         }
     }
