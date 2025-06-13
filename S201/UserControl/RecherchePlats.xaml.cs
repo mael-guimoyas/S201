@@ -1,4 +1,5 @@
-﻿using System;
+﻿using S201.Classes;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Common;
@@ -22,10 +23,13 @@ namespace S201
     /// </summary>
     public partial class RecherchePlats : UserControl
     {
+        private Commandes commandeEnCours;
+
         public ObservableCollection<Plat> lesPlats { get; set; }
-        public RecherchePlats()
+        public RecherchePlats(Commandes commande)
         {
             InitializeComponent();
+            this.commandeEnCours = commande;
             ChargeData();
         }
         public void ChargeData()
@@ -41,11 +45,6 @@ namespace S201
 
                 Application.Current.Shutdown();
             }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Conteneur.Content = new CreerPlat();
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -135,6 +134,34 @@ namespace S201
         {
             CollectionViewSource.GetDefaultView(dgPlat.ItemsSource).Refresh();
             dgPlat.Items.Filter = RechercheParSousCat;
+        }
+
+        private void butAjouterACommande_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgPlat.SelectedItem is Plat platSelectionne)
+            {
+                PlatCommande platCommande = new PlatCommande
+                {
+                    Numcommande = commandeEnCours.NumCommande,
+                    Numplat = platSelectionne.NumPlat,
+                    Prix = platSelectionne.PrixUnitaire,
+                    Quantite = 1
+                };
+
+                int resultat = platCommande.Create();
+
+                if (resultat > 0)
+                {
+                    Client clientAssocie = new Client(commandeEnCours.NumClient); // ou une méthode équivalente
+                    CreerCommande ucCommande = new CreerCommande(clientAssocie, commandeEnCours);
+                    MainWindow wPrincipale = (MainWindow)Application.Current.MainWindow;
+                    wPrincipale.Conteneur = ucCommande;
+                }
+                else
+                {
+                    MessageBox.Show("Erreur lors de l’ajout du plat.");
+                }
+            }
         }
     }
 }

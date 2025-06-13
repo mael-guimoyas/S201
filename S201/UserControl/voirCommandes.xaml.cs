@@ -1,7 +1,10 @@
-﻿using S201.Classes;
+﻿using Microsoft.Ajax.Utilities;
+using NPOI.SS.Formula.Functions;
+using S201.Classes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -92,14 +95,37 @@ namespace S201
 
         private void butCommande_Click(object sender, RoutedEventArgs e)
         {
-            Client unClient = new Client();
-            Commandes uneCommande = new Commandes();
-            CreerCommande creerCommande = new CreerCommande(unClient, uneCommande);
-            MainWindow wPrincipale = (MainWindow)Application.Current.MainWindow;
-            wPrincipale.Conteneur = creerCommande;
-            creerCommande.typeCommande.Text = "Creation de commande";
+            try
+            {
+                Random randEmployer = new Random();
+                Random randClient = new Random();
+                Client unClient = new Client(); // attention : initialiser ses champs
+                Commandes uneCommande = new Commandes();
+
+                // Exemple d'initialisation minimale
+                uneCommande.NumClient = randClient.Next(1,97);
+                uneCommande.NumEmploye = randEmployer.Next(11,20);
+                uneCommande.DateCommande = DateTime.Now;
+                uneCommande.DateRetraitCommande = DateTime.Now.AddDays(3);
+                uneCommande.EstPaye = false;
+                uneCommande.EstRetire = false;
+                uneCommande.PrixTotal = 0.0;
+
+                uneCommande.NumCommande = uneCommande.Create();
+                LesCommandes.LesCommandes.Add(uneCommande);
+
+                CreerCommande creerCommande = new CreerCommande(unClient, uneCommande);
+                MainWindow wPrincipale = (MainWindow)Application.Current.MainWindow;
+                wPrincipale.Conteneur = creerCommande;
+                creerCommande.typeCommande.Text = "Création de commande n° : " + uneCommande.NumCommande;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Une erreur est survenue : " + ex.Message);
+            }
 
         }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -114,7 +140,12 @@ namespace S201
             MainWindow wPrincipale = (MainWindow)Application.Current.MainWindow;
             wPrincipale.Conteneur = creerCommande;
 
-            creerCommande.typeCommande.Text = "Modification de commande";
+            creerCommande.typeCommande.Text = "Modification de commande n° : " + commande.NumCommande;
+
+        }
+
+        private void dgCommande_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
+        {
 
         }
     }
