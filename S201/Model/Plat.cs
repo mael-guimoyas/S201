@@ -139,7 +139,7 @@ namespace S201
             using (NpgsqlCommand cmdSelect = new NpgsqlCommand("SELECT * FROM Plat;"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
-                foreach (DataRow dr in dt.Rows)
+                foreach (DataRow dr in dt.Rows) 
                 {
                     lesPlats.Add(new Plat(
                         (int)dr["numPlat"],
