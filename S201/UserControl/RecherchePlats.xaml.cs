@@ -45,7 +45,6 @@ namespace S201
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Conteneur.Content = new CreerPlat();
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
