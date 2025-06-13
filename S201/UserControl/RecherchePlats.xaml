@@ -124,7 +124,7 @@
                     <DataGridTextColumn Binding="{Binding NumSousCatégorie}" Header="N° SousCatégorie" />
                     <DataGridTextColumn Binding="{Binding NumPeriode}" Header="N° Periode" />
                     <DataGridTextColumn Binding="{Binding NomPlat}" Header="Nom Plat" />
-                    <DataGridTextColumn Binding="{Binding PrixUnitaire}" Header="Prix Unitaire" />
+                    <DataGridTextColumn Binding="{Binding PrixUnitaire, StringFormat={}{0} €}" Header="Prix Unitaire" />
                     <DataGridTextColumn Binding="{Binding DelaiPreparation}" Header="Temps Préparation" />
                     <DataGridTextColumn
                         Width="75"

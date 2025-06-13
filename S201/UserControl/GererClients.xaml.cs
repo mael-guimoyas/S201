@@ -68,7 +68,6 @@ namespace S201
             }
         }
 
-        // Recherche par nom prenom
         private bool RechercheClient(object obj)
         {
             if (string.IsNullOrWhiteSpace(txtRecherche.Text))
@@ -94,7 +93,6 @@ namespace S201
             }
         }
 
-        //Ajouter client
         private void btnAjouterClient_Click(object sender, RoutedEventArgs e)
         {
             AfficherCreationClient();
@@ -152,10 +150,30 @@ namespace S201
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
+        private void butCommandeClient_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgClients.SelectedItem is Client clientSelectionne)
+            {
+                voirCommandes voirCmd = new voirCommandes();
 
-        
+                var rechercheClientBox = voirCmd.FindName("rechercheClient") as TextBox;
+                if (rechercheClientBox != null)
+                {
+                    rechercheClientBox.Text = clientSelectionne.Numclient.ToString();
 
-       
+                    var view = CollectionViewSource.GetDefaultView(voirCmd.dgCommande.ItemsSource);
+                    if (view != null)
+                    {
+                        view.Filter = obj => voirCmd.RechercheClient(obj);
+                        view.Refresh();
+                    }
+                }
+
+                MainWindow wPrincipale = (MainWindow)Application.Current.MainWindow;
+                wPrincipale.Conteneur = voirCmd;
+            }
+        }
+
     }
 }
 

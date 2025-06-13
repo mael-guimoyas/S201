@@ -27,13 +27,11 @@ namespace S201
         public event EventHandler<ClientCreeEventArgs> ClientCree;
         private void btnEnregistrer_Click(object sender, RoutedEventArgs e)
         {
-            // Validation des champs
             if (!ValiderChamps())
                 return;
 
             try
             {
-                // Créer un nouveau client
                 Client nouveauClient = new Client
                 {
                     Nomclient = txtNom.Text.Trim(),
@@ -44,17 +42,13 @@ namespace S201
                     Adresseville = txtVille.Text.Trim()
                 };
                     
-
-                // Enregistrer dans la base de données
                 if (nouveauClient.Create())
                 {
                     MessageBox.Show("Client créé avec succès !", "Succès",
                         MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    // Déclencher l'événement pour notifier la création
                     ClientCree?.Invoke(this, new ClientCreeEventArgs(nouveauClient));
 
-                    // Vider les champs
                     ViderChamps();
                 }
                 else
@@ -88,7 +82,6 @@ namespace S201
 
             ViderChamps();
 
-            // Retourner à la gestion des clients
             ClientCree?.Invoke(this, new ClientCreeEventArgs(null, true));
             DialogResult = true;
         }
@@ -96,7 +89,6 @@ namespace S201
 
         private bool ValiderChamps()
         {
-            // Vérifier les champs obligatoires
             if (string.IsNullOrWhiteSpace(txtNom.Text))
             {
                 MessageBox.Show("Le nom est obligatoire.", "Validation",
@@ -121,7 +113,6 @@ namespace S201
                 return false;
             }
 
-            // Validation du format du téléphone (10 chiffres)
             string telephone = txtTelephone.Text.Trim();
             if (!telephone.All(char.IsDigit) || telephone.Length != 10)
             {
@@ -147,7 +138,6 @@ namespace S201
                 return false;
             }
 
-            // Validation du code postal (5 chiffres)
             string codePostal = txtCodePostal.Text.Trim();
             if (!codePostal.All(char.IsDigit) || codePostal.Length != 5)
             {
@@ -186,11 +176,10 @@ namespace S201
             txtRue.Text = "";
             txtCodePostal.Text = "";
             txtVille.Text = "";
-            cmbStatut.SelectedIndex = 0; // Actif par défaut
+            cmbStatut.SelectedIndex = 0; 
         }
     }
 
-    // Classe pour les arguments de l'événement
     public class ClientCreeEventArgs : EventArgs
     {
         public Client Client { get; set; }

@@ -51,7 +51,6 @@
                             TextChanged="ajoutClient_TextChanged" />
                     </Grid>
 
-                    <!--  Cadre client sélectionné  -->
                     <Border
                         Padding="10"
                         Background="#F5F5F5"
@@ -123,7 +122,7 @@
                                     Header="Quantité" />
                                 <DataGridTextColumn
                                     Width="*"
-                                    Binding="{Binding Prix, StringFormat={}{0:F2}}"
+                                    Binding="{Binding Prix, StringFormat={}{0} €}"
                                     Header="Prix (€)" />
                             </DataGrid.Columns>
                         </DataGrid>

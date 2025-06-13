@@ -126,7 +126,6 @@ namespace S201
                 MessageBox.Show("Aucune commande sélectionnée.");
                 return;
             }
-            // Supprime d'abord en base
             int lignesSupprimees = commandeEnCours.Delete();
 
             if (lignesSupprimees > 0)

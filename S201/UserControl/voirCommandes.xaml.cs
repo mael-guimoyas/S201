@@ -27,6 +27,7 @@ namespace S201
     {
         private Commandes commandeAModifier;
         public TextBox RechercheJourTextBox => rechercheJour;
+        public TextBox RechercheClientTextBox => rechercheClient;
 
         public ListeCommande LesCommandes { get; set; }
 
@@ -51,20 +52,21 @@ namespace S201
             }
         }
 
-        private bool RechercheClient(object obj)
+        public bool RechercheClient(object obj)
         {
             if (string.IsNullOrWhiteSpace(rechercheClient.Text))
                 return true;
 
             if (obj is Commandes uneCommande)
             {
-                // Vérifie si NumClient commence par la chaîne tapée dans rechercheClient.Text
                 return uneCommande.NumClient.ToString()
                     .StartsWith(rechercheClient.Text, StringComparison.OrdinalIgnoreCase);
             }
 
             return false;
         }
+
+
         private bool RechercheDate(object obj)
         {
             if (string.IsNullOrWhiteSpace(rechercheJour.Text))
@@ -79,14 +81,19 @@ namespace S201
             return false;
         }
 
-
-
-
         private void rechercheClient_TextChanged(object sender, TextChangedEventArgs e)
         {
-            CollectionViewSource.GetDefaultView(dgCommande.ItemsSource).Refresh();
-            dgCommande.Items.Filter = RechercheClient;
+            if (dgCommande.ItemsSource == null)
+                return;
+
+            var view = CollectionViewSource.GetDefaultView(dgCommande.ItemsSource);
+            if (view != null)
+            {
+                view.Filter = obj => RechercheClient(obj) && RechercheDate(obj);
+                view.Refresh();
+            }
         }
+
 
         private void rechercheJour_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -100,11 +107,10 @@ namespace S201
             {
                 Random randEmployer = new Random();
                 Random randClient = new Random();
-                Client unClient = new Client(); // attention : initialiser ses champs
+                Client unClient = new Client();
                 Commandes uneCommande = new Commandes();
                 ListeCommande lCommande = new ListeCommande();
 
-                // Exemple d'initialisation minimale
                 uneCommande.NumClient = randClient.Next(1,97);
                 uneCommande.NumEmploye = randEmployer.Next(11,20);
                 uneCommande.DateCommande = DateTime.Now;
@@ -148,9 +154,6 @@ namespace S201
 
         }
 
-        private void dgCommande_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
-        {
-
-        }
+  
     }
 }

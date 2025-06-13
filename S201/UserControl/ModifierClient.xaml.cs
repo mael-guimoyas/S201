@@ -51,7 +51,6 @@ namespace S201
 
             try
             {
-                // Mettre à jour les données du client
                 clientAModifier.Nomclient = txtNom.Text.Trim();
                 clientAModifier.Prenomclient = txtPrenom.Text.Trim();
                 clientAModifier.Tel = txtTelephone.Text.Trim();
@@ -59,7 +58,6 @@ namespace S201
                 clientAModifier.Adressecp = txtCodePostal.Text.Trim();
                 clientAModifier.Adresseville = txtVille.Text.Trim();
 
-                // Appeler la méthode Update (à implémenter dans la classe Client)
                 bool succes = clientAModifier.Update();
 
                 if (succes)
@@ -67,7 +65,6 @@ namespace S201
                     MessageBox.Show("Client modifié avec succès!", "Succès",
                         MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    // Déclencher l'événement de modification
                     ClientModifie?.Invoke(this, new ClientModifieEventArgs { Client = clientAModifier, Annule = false });
                 }
                 else
@@ -120,7 +117,6 @@ namespace S201
         }
     }
 
-    // Classe d'arguments pour l'événement de modification
     public class ClientModifieEventArgs : EventArgs
     {
         public Client Client { get; set; }

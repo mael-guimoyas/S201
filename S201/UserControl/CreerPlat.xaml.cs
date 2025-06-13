@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace S201
 {
-    /// <summary>
-    /// Logique d'interaction pour CreerPlat.xaml
-    /// </summary>
     public partial class CreerPlat : Window 
     {
         public enum Action { Modifier, Créer}

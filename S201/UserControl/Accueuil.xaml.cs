@@ -69,5 +69,13 @@ namespace S201
             MainWindow wPrincipale = (MainWindow)Application.Current.MainWindow;
             wPrincipale.Conteneur = voirCommandes;
         }
+
+        private void butAccClient_Click(object sender, RoutedEventArgs e)
+        {
+            GererClients gClient  = new GererClients();
+
+            MainWindow wPrincipale = (MainWindow)Application.Current.MainWindow;
+            wPrincipale.Conteneur = gClient;
+        }
     }
 }

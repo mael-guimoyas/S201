@@ -22,11 +22,9 @@
                       HorizontalAlignment="Center"/>
         </Border>
 
-        <!-- Formulaire -->
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="20">
             <StackPanel MaxWidth="500">
 
-                <!-- Nom -->
                 <Label Content="Nom *" FontWeight="Bold" Margin="0,10,0,5"/>
                 <TextBox x:Name="txtNom" 
                         Height="35" 
@@ -35,7 +33,6 @@
                         BorderBrush="#CCCCCC"
                         BorderThickness="1"/>
 
-                <!-- Prénom -->
                 <Label Content="Prénom *" FontWeight="Bold" Margin="0,10,0,5"/>
                 <TextBox x:Name="txtPrenom" 
                         Height="35" 
@@ -44,7 +41,6 @@
                         BorderBrush="#CCCCCC"
                         BorderThickness="1"/>
 
-                <!-- Téléphone -->
                 <Label Content="Téléphone *" FontWeight="Bold" Margin="0,10,0,5"/>
                 <TextBox x:Name="txtTelephone" 
                         Height="35" 
@@ -53,7 +49,6 @@
                         BorderBrush="#CCCCCC"
                         BorderThickness="1"/>
 
-                <!-- Rue -->
                 <Label Content="Rue *" FontWeight="Bold" Margin="0,10,0,5"/>
                 <TextBox x:Name="txtRue" 
                         Height="35" 
@@ -62,7 +57,6 @@
                         BorderBrush="#CCCCCC"
                         BorderThickness="1"/>
 
-                <!-- Code Postal -->
                 <Label Content="Code Postal *" FontWeight="Bold" Margin="0,10,0,5"/>
                 <TextBox x:Name="txtCodePostal" 
                         Height="35" 
@@ -71,7 +65,6 @@
                         BorderBrush="#CCCCCC"
                         BorderThickness="1"/>
 
-                <!-- Ville -->
                 <Label Content="Ville *" FontWeight="Bold" Margin="0,10,0,5"/>
                 <TextBox x:Name="txtVille" 
                         Height="35" 
@@ -80,7 +73,6 @@
                         BorderBrush="#CCCCCC"
                         BorderThickness="1"/>
 
-                <!-- Statut -->
                 <Label Content="Statut" FontWeight="Bold" Margin="0,10,0,5"/>
                 <ComboBox x:Name="cmbStatut" 
                          Height="35" 
@@ -92,7 +84,6 @@
                     <ComboBoxItem Content="Inactif"/>
                 </ComboBox>
 
-                <!-- Note obligatoire -->
                 <TextBlock Text="* Champs obligatoires" 
                           FontStyle="Italic" 
                           Foreground="Gray" 
@@ -101,7 +92,6 @@
             </StackPanel>
         </ScrollViewer>
 
-        <!-- Boutons -->
         <Border Grid.Row="2" Background="#F5F5F5" Padding="20">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="btnAnnuler" 
